@@ -272,16 +272,16 @@
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|x64'" />
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'">$(ProjectName)(诛仙)_x86</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(诛仙203)|Win32'">$(ProjectName)(诛仙)_x86</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(诛仙203)|Win32'">$(ProjectName)(诛仙203)_x86</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'">$(ProjectName)(笑傲江湖)_x86</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'">$(ProjectName)(诛仙)_x64</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(诛仙203)|x64'">$(ProjectName)(诛仙)_x64</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(诛仙203)|x64'">$(ProjectName)(诛仙203)_x64</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'">$(ProjectName)(笑傲江湖)_x64</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'">$(ProjectName)(诛仙)_x86</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙203)|Win32'">$(ProjectName)(诛仙)_x86</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙203)|Win32'">$(ProjectName)(诛仙203)_x86</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'">$(ProjectName)(笑傲江湖)_x86</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'">$(ProjectName)(诛仙)_x64</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙203)|x64'">$(ProjectName)(诛仙)_x64</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙203)|x64'">$(ProjectName)(诛仙203)_x64</TargetName>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'">$(ProjectName)(笑傲江湖)_x64</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'">
