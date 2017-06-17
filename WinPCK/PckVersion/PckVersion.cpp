@@ -23,6 +23,10 @@ PCK_KEYS cPckKeys[10] = {	{"÷Ôœ…", TEXT("÷Ôœ…"),	PCK_VERSION_ZX,			0x20002, 0x4D
 PCK_KEYS cPckKeys[10] = {	{"–¶∞¡Ω≠∫˛",TEXT("–¶∞¡Ω≠∫˛"), PCK_VERSION_XAJH,0x20003, 0x5edb34f0, 0x00000000, 0x7b2a7820, 0x49ab7f1d33c3eddb, 0xa75dc142, 0x62a4f9e1, 0x3520c3d5},\
 							{0},\
 						};
+#elif defined PCKV203ZX
+PCK_KEYS cPckKeys[10] = { { "÷Ôœ…", TEXT("÷Ôœ…"),	PCK_VERSION_ZX,			0x20003, 0x4DCA23EF, 0x00000000, 0xFDFDFEEE, 0xA8937462, 0xF00DBEEF, 0xA8937462, 0xF1A43653 },\
+						{0},\
+						};
 #endif
 
 CPckVersion::CPckVersion()

@@ -47,14 +47,14 @@ typedef union _QWORD{
 //#define MAX_PCKFILE_SIZE			0x7fffff00
 //#define MAX_PCKFILE_SIZE			0x6400000	//100MB
 
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 #define MAX_PCKFILE_SIZE			0x7fffff00
 #elif defined PCKV203
 #define MAX_PCKFILE_SIZE			0xffffff00
 #endif
 
 #else
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 #define MAX_PCKFILE_SIZE			0x7fffff00
 #elif defined PCKV203
 #define MAX_PCKFILE_SIZE			0xffffff00

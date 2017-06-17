@@ -72,7 +72,7 @@ typedef struct _PCK_KEYS
 
 typedef struct _PCK_HEAD {
 	DWORD		dwHeadCheckHead;
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 	DWORD		dwPckSize;
 	DWORD		dwHeadCheckTail;
 #elif defined PCKV203
@@ -85,21 +85,15 @@ typedef struct _PCK_TAIL {
 	DWORD		dwVersion;
 }PCKTAIL, *LPPCKTAIL;
 
+#ifdef PCKV202
+
 typedef struct _PCK_INDEX_ADDR {
 	DWORD		dwIndexTableCheckHead;
-#ifdef PCKV202
 	DWORD		dwVersion;
 	DWORD		dwCryptDataAddr;
-#elif defined PCKV203
-	QWORD		dwCryptDataAddr;
-#endif
 	char		szAdditionalInfo[MAX_PATH_PCK];
 	DWORD		dwIndexTableCheckTail;
-	//DWORD		dwAddress;
 }PCKINDEXADDR, *LPPCKINDEXADDR;
-
-
-#ifdef PCKV202
 
 typedef struct _PCK_FILE_INDEX {
 	char		szFilename[MAX_PATH_PCK];
@@ -112,6 +106,14 @@ typedef struct _PCK_FILE_INDEX {
 
 #elif defined PCKV203
 
+typedef struct _PCK_INDEX_ADDR {
+	DWORD		dwIndexTableCheckHead;
+	QWORD		dwCryptDataAddr;
+	char		szAdditionalInfo[MAX_PATH_PCK];
+	DWORD		dwIndexTableCheckTail;
+	//DWORD		dwAddress;
+}PCKINDEXADDR, *LPPCKINDEXADDR;
+
 typedef struct _PCK_FILE_INDEX {
 	char		szFilename[MAX_PATH_PCK];
 	DWORD		dwUnknown1;
@@ -120,6 +122,30 @@ typedef struct _PCK_FILE_INDEX {
 	DWORD		dwFileClearTextSize;
 	DWORD		dwFileCipherTextSize;
 	DWORD		dwUnknown2;
+}PCKFILEINDEX, *LPPCKFILEINDEX;
+
+#elif defined PCKV203ZX
+
+typedef struct _PCK_INDEX_ADDR {
+	DWORD		dwIndexTableCheckHead;
+	DWORD		dwVersion;
+	DWORD		dwCryptDataAddr;
+	DWORD		dwUnknown1;
+	char		szAdditionalInfo[MAX_PATH_PCK];
+	DWORD		dwIndexTableCheckTail;
+	DWORD		dwUnknown2;
+}PCKINDEXADDR, *LPPCKINDEXADDR;
+
+typedef struct _PCK_FILE_INDEX {
+	char		szFilename[MAX_PATH_PCK];
+	DWORD		dwUnknown1;
+	DWORD		dwUnknown2;
+	DWORD		dwAddressOffset;
+	DWORD		dwUnknown3;
+	DWORD		dwFileClearTextSize;
+	DWORD		dwFileCipherTextSize;
+	DWORD		dwUnknown4;
+	DWORD		dwUnknown5;
 }PCKFILEINDEX, *LPPCKFILEINDEX;
 
 #endif

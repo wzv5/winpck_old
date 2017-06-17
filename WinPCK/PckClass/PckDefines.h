@@ -40,7 +40,7 @@ typedef unsigned char       BYTE;
 
 
 
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 	#define PCKADDR	DWORD
 #elif defined PCKV203
 	#define PCKADDR	QWORD
@@ -50,11 +50,17 @@ typedef unsigned char       BYTE;
 	#define	INDEXTABLE_CLEARTEXT_LENGTH	0x114
 #elif defined PCKV203
 	#define	INDEXTABLE_CLEARTEXT_LENGTH	0x118
+#elif defined PCKV203ZX
+	#define INDEXTABLE_CLEARTEXT_LENGTH	0x120
 #endif
 
 #define	PCK_BEGINCOMPRESS_SIZE			20
 #define	MAX_PATH_PCK					256
-#define PCK_TAIL_OFFSET					280
+#ifdef PCKV203ZX
+	#define PCK_TAIL_OFFSET					288
+#else
+	#define PCK_TAIL_OFFSET					280
+#endif
 #define PCK_DATA_START_AT				12
 
 

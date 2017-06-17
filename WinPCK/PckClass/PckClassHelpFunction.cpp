@@ -55,6 +55,9 @@ void CPckClass::AfterProcess(CMapViewFileWrite *lpWrite, PCK_ALL_INFOS &PckAllIn
 	PrintLogI(TEXT_LOG_FLUSH_CACHE);
 
 	//дPCKINDEXADDR
+#ifdef PCKV203ZX
+	PckAllInfo.PckIndexAddr.dwUnknown1 = 0xffffffff;
+#endif
 	PckAllInfo.PckIndexAddr.dwCryptDataAddr = dwAddressName ^ m_lpThisPckKey->IndexesEntryAddressCryptKey;
 	strcpy(PckAllInfo.PckIndexAddr.szAdditionalInfo,	PCK_ADDITIONAL_INFO
 														PCK_ADDITIONAL_INFO_STSM);
