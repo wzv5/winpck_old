@@ -939,7 +939,7 @@ BOOL CPckClass::FillPckHeaderAndInitArray(PCK_ALL_INFOS &PckAllInfo, int threadn
 
 	//构建头
 	PckAllInfo.PckHead.dwHeadCheckHead = m_lpThisPckKey->HeadVerifyKey1;
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 	PckAllInfo.PckHead.dwHeadCheckTail = m_lpThisPckKey->HeadVerifyKey2;
 #endif
 	//pckHead.dwPckSize = |PCK文件大小|;
@@ -950,7 +950,7 @@ BOOL CPckClass::FillPckHeaderAndInitArray(PCK_ALL_INFOS &PckAllInfo, int threadn
 	PckAllInfo.PckIndexAddr.dwIndexTableCheckTail = m_lpThisPckKey->TailVerifyKey2;
 	//pckIndexAddr.dwIndexValue = |文件名压缩数据开始| ^ FILEINDEX_ADDR_CONST;
 
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 	PckAllInfo.PckTail.dwVersion = PckAllInfo.PckIndexAddr.dwVersion = m_lpThisPckKey->Version;
 #elif defined PCKV203
 	PckAllInfo.PckTail.dwVersion = m_lpThisPckKey->Version;
@@ -1116,7 +1116,7 @@ BOOL CPckClass::CreatePckFileMT(LPTSTR szPckFile, LPTSTR szPath)
 
 	//计算大概需要多大空间qwTotalFileSize
 	qwTotalFileSizeTemp = qwTotalFileSize * 0.6;
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 	if(0 != (qwTotalFileSizeTemp >> 32))
 #elif defined PCKV203
 	if(0 != (qwTotalFileSizeTemp >> 33))
@@ -1506,7 +1506,7 @@ BOOL CPckClass::UpdatePckFile(LPTSTR szPckFile, TCHAR (*lpszFilePath)[MAX_PATH],
 
 	//计算大概需要多大空间qwTotalFileSize
 	qwTotalFileSizeTemp = qwTotalFileSize * 0.6 + mt_dwAddressName;
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 	if(0 != (qwTotalFileSizeTemp >> 32))
 #elif defined PCKV203
 	if(0 != (qwTotalFileSizeTemp >> 33))

@@ -90,7 +90,7 @@ BOOL CPckClass::RebuildPckFile(LPTSTR szRebuildPckFile)
 
 	//构建头
 	pckAllInfo.PckHead.dwHeadCheckHead = m_lpThisPckKey->HeadVerifyKey1;
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 	pckAllInfo.PckHead.dwHeadCheckTail = m_lpThisPckKey->HeadVerifyKey2;
 #endif
 
@@ -103,7 +103,7 @@ BOOL CPckClass::RebuildPckFile(LPTSTR szRebuildPckFile)
 
 	//pckIndexAddr.dwIndexValue = |文件名压缩数据开始| ^ FILEINDEX_ADDR_CONST;
 
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 	pckAllInfo.PckTail.dwVersion = pckAllInfo.PckIndexAddr.dwVersion = m_lpThisPckKey->Version;
 #elif defined PCKV203
 	pckAllInfo.PckTail.dwVersion = m_lpThisPckKey->Version;

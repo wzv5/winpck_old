@@ -134,7 +134,7 @@ LPPCK_KEYS CPckVersion::findKeyById(LPPCK_ALL_INFOS lpPckAllInfo/*, CMapViewFile
 	while(lpKeyPtr->id){
 
 		if(	lpKeyPtr->HeadVerifyKey1 == lpPckAllInfo->PckHead.dwHeadCheckHead &&
-#ifdef PCKV202
+#if defined PCKV202 || defined PCKV203ZX
 			lpKeyPtr->HeadVerifyKey2 == lpPckAllInfo->PckHead.dwHeadCheckTail &&
 #endif
 			lpKeyPtr->TailVerifyKey1 == lpPckAllInfo->PckIndexAddr.dwIndexTableCheckHead &&
