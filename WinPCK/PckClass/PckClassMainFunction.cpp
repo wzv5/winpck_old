@@ -103,10 +103,14 @@ BOOL CPckClass::RebuildPckFile(LPTSTR szRebuildPckFile)
 
 	//pckIndexAddr.dwIndexValue = |文件名压缩数据开始| ^ FILEINDEX_ADDR_CONST;
 
-#if defined PCKV202 || defined PCKV203ZX
+#ifdef PCKV202
 	pckAllInfo.PckTail.dwVersion = pckAllInfo.PckIndexAddr.dwVersion = m_lpThisPckKey->Version;
 #elif defined PCKV203
 	pckAllInfo.PckTail.dwVersion = m_lpThisPckKey->Version;
+#elif defined PCKV203ZX
+	pckAllInfo.PckTail.dwVersion = pckAllInfo.PckIndexAddr.dwVersion = m_lpThisPckKey->Version;
+	pckAllInfo.PckIndexAddr.dwUnknown1 = 0xffffffff;
+	pckAllInfo.PckIndexAddr.dwUnknown2 = 0;
 #endif
 
 	//打开源文件 

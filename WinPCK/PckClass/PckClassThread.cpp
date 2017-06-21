@@ -101,6 +101,9 @@ VOID CPckClass::CompressThread(VOID* pParam)
 
 	//memset(pckFileIndex.dwAttachedValue, 0, sizeof(pckFileIndex.dwAttachedValue));
 	pckFileIndex.dwUnknown1 = pckFileIndex.dwUnknown2 = 0;
+#ifdef PCKV203ZX
+	pckFileIndex.dwUnknown3 = pckFileIndex.dwUnknown4 = pckFileIndex.dwUnknown5 = 0;
+#endif
 
 	//开始
 	LPPCKINDEXTABLE_COMPRESS	lpPckIndexTablePtr = mt_lpPckIndexTable;
@@ -513,6 +516,9 @@ VOID CPckClass::CompressThreadAdd(VOID* pParam)
 	PCKFILEINDEX		pckFileIndex;
 
 	pckFileIndex.dwUnknown1 = pckFileIndex.dwUnknown2 = 0;
+#ifdef PCKV203ZX
+	pckFileIndex.dwUnknown3 = pckFileIndex.dwUnknown4 = pckFileIndex.dwUnknown5 = 0;
+#endif
 	//memset(pckFileIndex.dwAttachedValue, 0, sizeof(pckFileIndex.dwAttachedValue));
 //#ifdef PCKV202
 //	memset(&pckFileIndex.dwUnknown1, 0, sizeof(DWORD) * 5);
@@ -948,6 +954,10 @@ BOOL CPckClass::FillPckHeaderAndInitArray(PCK_ALL_INFOS &PckAllInfo, int threadn
 
 	PckAllInfo.PckIndexAddr.dwIndexTableCheckHead = m_lpThisPckKey->TailVerifyKey1;
 	PckAllInfo.PckIndexAddr.dwIndexTableCheckTail = m_lpThisPckKey->TailVerifyKey2;
+#ifdef PCKV203ZX
+	PckAllInfo.PckIndexAddr.dwUnknown1 = 0xffffffff;
+	PckAllInfo.PckIndexAddr.dwUnknown2 = 0;
+#endif
 	//pckIndexAddr.dwIndexValue = |文件名压缩数据开始| ^ FILEINDEX_ADDR_CONST;
 
 #if defined PCKV202 || defined PCKV203ZX
@@ -1159,6 +1169,9 @@ BOOL CPckClass::CreatePckFileMT(LPTSTR szPckFile, LPTSTR szPath)
 
 		PCKFILEINDEX	pckFileIndex;
 		pckFileIndex.dwUnknown1 = pckFileIndex.dwUnknown2 = 0;
+#ifdef PCKV203ZX
+		pckFileIndex.dwUnknown3 = pckFileIndex.dwUnknown4 = pckFileIndex.dwUnknown5 = 0;
+#endif
 
 		//初始化指针
 		LPPCKINDEXTABLE_COMPRESS	lpPckIndexTablePtr = mt_lpPckIndexTable;
@@ -1599,7 +1612,9 @@ BOOL CPckClass::UpdatePckFile(LPTSTR szPckFile, TCHAR (*lpszFilePath)[MAX_PATH],
 
 		PCKFILEINDEX	pckFileIndex;
 		pckFileIndex.dwUnknown1 = pckFileIndex.dwUnknown2 = 0;
-
+#ifdef PCKV203ZX
+		pckFileIndex.dwUnknown3 = pckFileIndex.dwUnknown4 = pckFileIndex.dwUnknown5 = 0;
+#endif
 		//初始化指针
 		LPPCKINDEXTABLE_COMPRESS	lpPckIndexTablePtr = mt_lpPckIndexTable;
 		lpfirstFile = m_firstFile;
