@@ -112,6 +112,7 @@ void CMapViewFile::clear()
 	}
 
 	if(NULL != hFile && INVALID_HANDLE_VALUE != hFile){
+		FlushFileBuffers(hFile);
 		CloseHandle(hFile);
 		hFile = NULL;
 	}
@@ -124,6 +125,7 @@ void CMapViewFile::clear()
 		}
 
 		if(NULL != hFile2 && INVALID_HANDLE_VALUE != hFile2){
+			FlushFileBuffers(hFile2);
 			CloseHandle(hFile2);
 			hFile2 = NULL;
 		}
