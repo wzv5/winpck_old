@@ -26,7 +26,7 @@
 
 #define	THIS_NAME			"WinPCK "
 
-#define	THIS_VERSION		"v1.20.8b "
+#define	THIS_VERSION		"v1.20.8c "
 //#define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 " 
 #ifdef PCKV202
 #define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 (完美世界+诛仙+武林外传+圣斗士等)" 

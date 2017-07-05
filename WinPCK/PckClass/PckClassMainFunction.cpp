@@ -90,7 +90,7 @@ BOOL CPckClass::RebuildPckFile(LPTSTR szRebuildPckFile)
 
 	//构建头
 	pckAllInfo.PckHead.dwHeadCheckHead = m_lpThisPckKey->HeadVerifyKey1;
-#if defined PCKV202 || defined PCKV203ZX
+#if defined PCKV202
 	pckAllInfo.PckHead.dwHeadCheckTail = m_lpThisPckKey->HeadVerifyKey2;
 #endif
 
@@ -109,8 +109,7 @@ BOOL CPckClass::RebuildPckFile(LPTSTR szRebuildPckFile)
 	pckAllInfo.PckTail.dwVersion = m_lpThisPckKey->Version;
 #elif defined PCKV203ZX
 	pckAllInfo.PckTail.dwVersion = pckAllInfo.PckIndexAddr.dwVersion = m_lpThisPckKey->Version;
-	pckAllInfo.PckIndexAddr.dwUnknown1 = 0xffffffff;
-	pckAllInfo.PckIndexAddr.dwUnknown2 = 0;
+	pckAllInfo.PckIndexAddr.dwUnknown1 = 0;
 #endif
 
 	//打开源文件 

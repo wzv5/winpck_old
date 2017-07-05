@@ -24,7 +24,7 @@ PCK_KEYS cPckKeys[10] = {	{"Ð¦°Á½­ºþ",TEXT("Ð¦°Á½­ºþ"), PCK_VERSION_XAJH,0x20003
 							{0},\
 						};
 #elif defined PCKV203ZX
-PCK_KEYS cPckKeys[10] = { { "ÖïÏÉ", TEXT("ÖïÏÉ"),	PCK_VERSION_ZX,			0x20003, 0x4DCA23EF, 0x00000000, 0xFDFDFEEE, 0xA8937462, 0xF00DBEEF, 0xA8937462, 0xF1A43653 },\
+PCK_KEYS cPckKeys[10] = { { "ÖïÏÉ", TEXT("ÖïÏÉ"),	PCK_VERSION_ZX,			0x20003, 0x4DCA23EF, 0x00000000, 0xFDFDFEEE, 0xFFFFFFFFA8937462, 0xF00DBEEF, 0xA8937462, 0xF1A43653 },\
 						{0},\
 						};
 #endif
@@ -134,7 +134,7 @@ LPPCK_KEYS CPckVersion::findKeyById(LPPCK_ALL_INFOS lpPckAllInfo/*, CMapViewFile
 	while(lpKeyPtr->id){
 
 		if(	lpKeyPtr->HeadVerifyKey1 == lpPckAllInfo->PckHead.dwHeadCheckHead &&
-#if defined PCKV202 || defined PCKV203ZX
+#if defined PCKV202
 			lpKeyPtr->HeadVerifyKey2 == lpPckAllInfo->PckHead.dwHeadCheckTail &&
 #endif
 			lpKeyPtr->TailVerifyKey1 == lpPckAllInfo->PckIndexAddr.dwIndexTableCheckHead &&

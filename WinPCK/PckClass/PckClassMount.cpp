@@ -78,7 +78,7 @@ BOOL CPckClass::MountPckFile(LPCTSTR	szFile)
 		//打印详细原因：
 		char szPrintf[1024];
 
-	#if defined PCKV202 || defined PCKV203ZX
+	#if defined PCKV202
 		StringCchPrintfA(szPrintf, 1024, "调试信息："
 						"HEAD->dwHeadCheckHead = 0x%08x, "
 						"HEAD->dwPckSize = 0x%08x, "
@@ -99,7 +99,7 @@ BOOL CPckClass::MountPckFile(LPCTSTR	szFile)
 
 
 
-	#elif defined PCKV203
+	#elif defined PCKV203 || defined PCKV203ZX
 		StringCchPrintfA(szPrintf, 1024, "调试信息："
 						"HEAD->dwHeadCheckHead = 0x%08x, "
 						"HEAD->dwPckSize = 0x%016llx, "

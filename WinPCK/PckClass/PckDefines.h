@@ -40,9 +40,11 @@ typedef unsigned char       BYTE;
 
 
 
-#if defined PCKV202 || defined PCKV203ZX
+#if defined PCKV202
 	#define PCKADDR	DWORD
 #elif defined PCKV203
+	#define PCKADDR	QWORD
+#elif defined PCKV203ZX
 	#define PCKADDR	QWORD
 #endif
 
