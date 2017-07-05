@@ -1125,9 +1125,9 @@ BOOL CPckClass::CreatePckFileMT(LPTSTR szPckFile, LPTSTR szPath)
 
 	//计算大概需要多大空间qwTotalFileSize
 	qwTotalFileSizeTemp = qwTotalFileSize * 0.6;
-#if defined PCKV202 || defined PCKV203ZX
+#if defined PCKV202
 	if(0 != (qwTotalFileSizeTemp >> 32))
-#elif defined PCKV203
+#elif defined PCKV203 || defined PCKV203ZX
 	if(0 != (qwTotalFileSizeTemp >> 33))
 #endif
 	{
@@ -1518,9 +1518,9 @@ BOOL CPckClass::UpdatePckFile(LPTSTR szPckFile, TCHAR (*lpszFilePath)[MAX_PATH],
 
 	//计算大概需要多大空间qwTotalFileSize
 	qwTotalFileSizeTemp = qwTotalFileSize * 0.6 + mt_dwAddressName;
-#if defined PCKV202 || defined PCKV203ZX
+#if defined PCKV202
 	if(0 != (qwTotalFileSizeTemp >> 32))
-#elif defined PCKV203
+#elif defined PCKV203 || defined PCKV203ZX
 	if(0 != (qwTotalFileSizeTemp >> 33))
 #endif
 	{

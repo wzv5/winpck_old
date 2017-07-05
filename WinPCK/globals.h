@@ -26,7 +26,7 @@
 
 #define	THIS_NAME			"WinPCK "
 
-#define	THIS_VERSION		"v1.20.8c "
+#define	THIS_VERSION		"v1.20.8d "
 //#define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 " 
 #ifdef PCKV202
 #define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 (完美世界+诛仙+武林外传+圣斗士等)" 
@@ -35,7 +35,7 @@
 #define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 (笑傲江湖)" 
 							//"(笑傲江湖)"
 #elif defined PCKV203ZX
-#define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 (诛仙)" 
+#define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 (诛仙203)" 
 
 #endif
 #define	THIS_AUTHOR			"程序编写 stsm/liqf/李秋枫\r\nE-Mail: stsm85@126.com\r\n\r\n诛仙十年兼容修改：https://github.com/wzv5/winpck"
