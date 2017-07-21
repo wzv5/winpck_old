@@ -30,12 +30,12 @@ _inline UINT64	TPicDlg::MakeRgbWithAlphaSSE2(UINT32 *dwBackColor, UINT32 *dwSrc)
 
 	mm0 = _mm_unpacklo_epi8(mm0, mm2);
 	mm1 = _mm_unpacklo_epi8(mm1, mm2);
-	__m128i mm3 = mm1;
+	__m128i mm3;// = mm1;
 	mm3 = _mm_set_epi16(0xff, mm1.m128i_i16[7], mm1.m128i_i16[7], mm1.m128i_i16[7], 0xff, mm1.m128i_i16[3], mm1.m128i_i16[3], mm1.m128i_i16[3]);
-	__m128i mm4 = mm0;
-	__m128i mm5 = mm1;
-	mm4 = _mm_subs_epu8(mm4, mm1);
-	mm5 = _mm_subs_epu8(mm5, mm0);
+	__m128i mm4;// = mm0;
+	__m128i mm5;// = mm1;
+	mm4 = _mm_subs_epu8(mm0, mm1);
+	mm5 = _mm_subs_epu8(mm1, mm0);
 	mm4 = _mm_mullo_epi16(mm4, mm3);
 	mm5 = _mm_mullo_epi16(mm5, mm3);
 	mm4 = _mm_srli_epi16(mm4, 8);

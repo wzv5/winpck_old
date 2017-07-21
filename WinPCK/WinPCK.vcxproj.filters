@@ -19,12 +19,6 @@
     <Filter Include="源文件\tlib">
       <UniqueIdentifier>{1b0c2642-ff3e-499f-af73-1b180c0785a4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\dds">
-      <UniqueIdentifier>{579fc46f-f0d2-448f-8b8a-c984c9d2ae9d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="头文件\PckVersion">
-      <UniqueIdentifier>{6e8aa49c-5e2a-4a6a-9832-032f7743a617}</UniqueIdentifier>
-    </Filter>
     <Filter Include="头文件\ZupClass">
       <UniqueIdentifier>{8c908083-5d92-4757-a9f8-f2a7f225baa3}</UniqueIdentifier>
     </Filter>
@@ -55,8 +49,11 @@
     <Filter Include="源文件\ZupClass">
       <UniqueIdentifier>{229c4c48-5c97-41ea-b058-8c2aa51e6d06}</UniqueIdentifier>
     </Filter>
-    <Filter Include="源文件\PckVersion">
-      <UniqueIdentifier>{db83e0e6-44d8-4f74-96fb-87685c471150}</UniqueIdentifier>
+    <Filter Include="源文件\dds">
+      <UniqueIdentifier>{579fc46f-f0d2-448f-8b8a-c984c9d2ae9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\tlib">
+      <UniqueIdentifier>{f8ac42b8-a202-4f12-8caf-a6bf5dbb4071}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -135,9 +132,6 @@
     <ClCompile Include="MapViewFile\MapViewFile.cpp">
       <Filter>源文件\MapViewFile</Filter>
     </ClCompile>
-    <ClCompile Include="PckVersion\PckVersion.cpp">
-      <Filter>源文件\PckVersion</Filter>
-    </ClCompile>
     <ClCompile Include="PckClass\PckClassFeedback.cpp">
       <Filter>源文件\PckClass</Filter>
     </ClCompile>
@@ -176,6 +170,27 @@
     </ClCompile>
     <ClCompile Include="BuildDIB.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PckClass\PckClassVersionDetect.cpp">
+      <Filter>源文件\PckClass</Filter>
+    </ClCompile>
+    <ClCompile Include="PckClass\PckClassExceptionRestore.cpp">
+      <Filter>源文件\PckClass</Filter>
+    </ClCompile>
+    <ClCompile Include="PckClass\PckClassReader.cpp">
+      <Filter>源文件\PckClass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tlib\tini.cpp">
+      <Filter>源文件\tlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tlib\tlist.cpp">
+      <Filter>源文件\tlib</Filter>
+    </ClCompile>
+    <ClCompile Include="..\tlib\tregist.cpp">
+      <Filter>源文件\tlib</Filter>
+    </ClCompile>
+    <ClCompile Include="PckClass\PckClassCompress.cpp">
+      <Filter>源文件\PckClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,9 +244,6 @@
     <ClInclude Include="MapViewFile\MapViewFile.h">
       <Filter>头文件\MapViewFile</Filter>
     </ClInclude>
-    <ClInclude Include="PckVersion\PckVersion.h">
-      <Filter>头文件\PckVersion</Filter>
-    </ClInclude>
     <ClInclude Include="PckClass\PckDefines.h">
       <Filter>头文件\PckClass</Filter>
     </ClInclude>
@@ -242,6 +254,45 @@
       <Filter>头文件\PckClass</Filter>
     </ClInclude>
     <ClInclude Include="PckClass\PckXchgDef.h">
+      <Filter>头文件\PckClass</Filter>
+    </ClInclude>
+    <ClInclude Include="PckClass\PckClassVersionDetect.h">
+      <Filter>头文件\PckClass</Filter>
+    </ClInclude>
+    <ClInclude Include="PckClass\PckClassExceptionRestore.h">
+      <Filter>头文件\PckClass</Filter>
+    </ClInclude>
+    <ClInclude Include="PckClass\PckClassReader.h">
+      <Filter>头文件\PckClass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tlib\tapi32ex.h">
+      <Filter>头文件\tlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tlib\tapi32u8.h">
+      <Filter>头文件\tlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tlib\tconf.h">
+      <Filter>头文件\tlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tlib\tini.h">
+      <Filter>头文件\tlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tlib\tlib.h">
+      <Filter>头文件\tlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tlib\tlist.h">
+      <Filter>头文件\tlib</Filter>
+    </ClInclude>
+    <ClInclude Include="..\tlib\tregist.h">
+      <Filter>头文件\tlib</Filter>
+    </ClInclude>
+    <ClInclude Include="PckClass\PckClassCompress.h">
+      <Filter>头文件\PckClass</Filter>
+    </ClInclude>
+    <ClInclude Include="PckClass\PckClassThreadCompressFunctions.h">
+      <Filter>头文件\PckClass</Filter>
+    </ClInclude>
+    <ClInclude Include="PckClass\PckClassVersionDetectFunctionDefinitions.h">
       <Filter>头文件\PckClass</Filter>
     </ClInclude>
   </ItemGroup>

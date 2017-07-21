@@ -12,7 +12,7 @@
 #include "ZupClass.h"
 
 
-BOOL CZupClass::CreatePckFileMT(LPTSTR szPckFile, LPTSTR szPath)
+BOOL CZupClass::CreatePckFile(LPTSTR szPckFile, LPTSTR szPath)
 {
 	PrintLogE(TEXT_NOTSUPPORT);
 	return FALSE;
@@ -20,6 +20,12 @@ BOOL CZupClass::CreatePckFileMT(LPTSTR szPckFile, LPTSTR szPath)
 
 //重建pck文件
 BOOL CZupClass::RebuildPckFile(LPTSTR szRebuildPckFile)
+{
+	PrintLogE(TEXT_NOTSUPPORT);
+	return FALSE;
+}
+
+BOOL CZupClass::RecompressPckFile(LPTSTR szRecompressPckFile)
 {
 	PrintLogE(TEXT_NOTSUPPORT);
 	return FALSE;

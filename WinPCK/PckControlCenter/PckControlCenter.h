@@ -13,22 +13,20 @@
 #pragma once
 
 #include "globals.h"
-
-//#include "PckXchgDef.h"
 #include "PckHeader.h"
 
 
 
 class CPckClass;
 
-class CPckControlCenter  
+class CPckControlCenter
 {
-//函数
+	//函数
 public:
 	CPckControlCenter();
 	CPckControlCenter(HWND hWnd);
 	virtual ~CPckControlCenter();
-	
+
 	void					init();
 	void					Reset(DWORD dwUIProgressUpper = 1);
 
@@ -43,7 +41,11 @@ public:
 	BOOL					Open(LPCTSTR lpszFile);
 	void					Close();
 
+	int						GetPckVersion();
 	void					SetPckVersion(int verID);
+
+	//获取当前配置名称
+	LPCTSTR					GetCurrentVersionName();
 
 	LPCTSTR					GetSaveDlgFilterString();
 
@@ -60,7 +62,7 @@ public:
 	///pck 类的交互
 	CONST	LPPCKINDEXTABLE		GetPckIndexTable();
 	//CONST	LPPCK_PATH_NODE		GetPckPathNode();
-	CONST	LPPCKHEAD			GetPckHead();
+	//CONST	LPPCKHEAD			GetPckHead();
 
 	//LPCTSTR						GetLastErrorString();
 
@@ -73,13 +75,9 @@ public:
 	//获取文件数
 	DWORD						GetPckFileCount();
 
-	PCKADDR						GetPckSize();
-	PCKADDR						GetPckDataAreaSize();
-	PCKADDR						GetPckRedundancyDataSize();
-
-	//获取当前配置名称
-	LPCSTR						GetCurrentVersionName();
-
+	QWORD						GetPckSize();
+	QWORD						GetPckDataAreaSize();
+	QWORD						GetPckRedundancyDataSize();
 
 	//预览文件
 	BOOL						GetSingleFileData(LPVOID lpvoidFileRead, LPPCKINDEXTABLE lpPckFileIndexTable, char *buffer, size_t sizeOfBuffer = 0);
@@ -96,18 +94,19 @@ public:
 	BOOL						RenameNode(LPPCK_PATH_NODE lpNode, char* lpszReplaceString);
 
 	//解压文件
-	BOOL	ExtractFiles(LPPCKINDEXTABLE *lpIndexToExtract, int nFileCount);
-	BOOL	ExtractFiles(LPPCK_PATH_NODE *lpNodeToExtract, int nFileCount);
+	BOOL						ExtractFiles(LPPCKINDEXTABLE *lpIndexToExtract, int nFileCount);
+	BOOL						ExtractFiles(LPPCK_PATH_NODE *lpNodeToExtract, int nFileCount);
 
 
 	//新建pck文件
-	BOOL	CreatePckFileMT(LPTSTR szPckFile, LPTSTR szPath);
+	BOOL	CreatePckFile(LPTSTR szPckFile, LPTSTR szPath);
 
 	//重建pck文件
 	BOOL	RebuildPckFile(LPTSTR szRebuildPckFile);
+	BOOL	RecompressPckFile(LPTSTR szRecompressPckFile);
 
 	//更新pck文件
-	BOOL	UpdatePckFile(LPTSTR szPckFile, TCHAR (*lpszFilePath)[MAX_PATH], int nFileCount, LPPCK_PATH_NODE lpNodeToInsert);
+	BOOL	UpdatePckFile(LPTSTR szPckFile, TCHAR(*lpszFilePath)[MAX_PATH], int nFileCount, LPPCK_PATH_NODE lpNodeToInsert);
 
 	//是否是支持更新的文件
 	BOOL	isSupportAddFileToPck();
@@ -122,41 +121,45 @@ public:
 	//log日志相关功能 
 	void	SetLogListWnd(HWND _hWndList);
 
-	void	PrintLogE(char *);
-	void	PrintLogW(char *);
-	void	PrintLogI(char *);
-	void	PrintLogD(char *);
 
+	void	PrintLogE(const char *);
+	void	PrintLogW(const char *);
+	void	PrintLogI(const char *);
+	void	PrintLogD(const char *);
+	void	PrintLogN(const char *);
 
-	void	PrintLogE(wchar_t *);
-	void	PrintLogW(wchar_t *);
-	void	PrintLogI(wchar_t *);
-	void	PrintLogD(wchar_t *);
-
+	void	PrintLogE(const wchar_t *);
+	void	PrintLogW(const wchar_t *);
+	void	PrintLogI(const wchar_t *);
+	void	PrintLogD(const wchar_t *);
+	void	PrintLogN(const wchar_t *);
 
 	//__FILE__, __FUNCTION__, __LINE__
-	void	PrintLogE(char *_maintext, char *_file, char *_func, long _line);
-	void	PrintLogE(wchar_t *_maintext, char *_file, char *_func, long _line);
-	void	PrintLogE(char *_fmt, char *_maintext, char *_file, char *_func, long _line);
-	void	PrintLogE(char *_fmt, wchar_t *_maintext, char *_file, char *_func, long _line);
+	void	PrintLogE(const char *_maintext, const char *_file, const char *_func, const long _line);
+	void	PrintLogE(const wchar_t *_maintext, const char *_file, const char *_func, const long _line);
+	void	PrintLogE(const char *_fmt, const char *_maintext, const char *_file, const char *_func, const long _line);
+	void	PrintLogE(const char *_fmt, const wchar_t *_maintext, const char *_file, const char *_func, const long _line);
 
-	void	PrintLog(char chLevel, char *_maintext);
-	void	PrintLog(char chLevel, wchar_t *_maintext);
-	void	PrintLog(char chLevel, char *_fmt, char *_maintext);
-	void	PrintLog(char chLevel, char *_fmt, wchar_t *_maintext);
+	void	PrintLog(const char chLevel, const char *_maintext);
+	void	PrintLog(const char chLevel, const wchar_t *_maintext);
+	void	PrintLog(const char chLevel, const char *_fmt, const char *_maintext);
+	void	PrintLog(const char chLevel, const char *_fmt, const wchar_t *_maintext);
+
+	//重置PCK的压缩参数
+	void	ResetCompressor();
 
 private:
-	
+
 	void	CreateRestoreData();
 	void	RestoreData(LPCTSTR lpszFile);
 	void	DeleteRestoreData();
 
 	//log日志相关功能 
-	void	_InsertLogIntoList(int, char *);
-	void	_InsertLogIntoList(int, wchar_t *);
+	void	_InsertLogIntoList(const int, const char *);
+	void	_InsertLogIntoList(const int, const wchar_t *);
 
 public:
-	
+
 
 	LPPCK_PATH_NODE				m_lpPckRootNode;
 
@@ -171,7 +174,7 @@ private:
 
 	TCHAR						m_lpszFile4Restore[MAX_PATH];
 
-	PCKHEAD						m_PckHead;
+	PCKHEAD_V2020				m_PckHeadForRestore;
 	LPBYTE						m_lpPckFileIndexData;
 	DWORD						m_dwPckFileIndexDataSize;
 

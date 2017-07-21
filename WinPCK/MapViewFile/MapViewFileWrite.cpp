@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// CMapViewFileWrite.cpp: 用于映射文件视图（写）
+// MapViewFileWrite.cpp: 用于映射文件视图（写）
 // 
 //
 // 此程序由 李秋枫/stsm/liqf 编写
@@ -10,14 +10,14 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "MapViewFile.h"
-
-
-
-
-CMapViewFileWrite::CMapViewFileWrite()
-{
-
 #ifdef USE_MAX_SINGLE_FILESIZE
+CMapViewFileWrite::CMapViewFileWrite(DWORD dwMaxPckSize)
+{
+#ifdef _DEBUG
+	m_Max_PckFile_Size = 0x6400000;	//100MB
+#else
+	m_Max_PckFile_Size = dwMaxPckSize;
+#endif
 	dwViewSizePck = dwViewSizePkx = 0;
 
 	*m_szPckFileName = 0;
@@ -25,64 +25,56 @@ CMapViewFileWrite::CMapViewFileWrite()
 
 	*m_szPkxFileName = 0;
 	*m_tszPkxFileName = 0;
-#endif
-
 	isWriteMode = TRUE;
 }
+#else
+CMapViewFileWrite::CMapViewFileWrite()
+{
+	isWriteMode = TRUE;
+}
+#endif
+
+//CMapViewFileWrite::CMapViewFileWrite(DWORD dwMaxPckSize)
+//{
+//
+//#ifdef USE_MAX_SINGLE_FILESIZE
+//	dwViewSizePck = dwViewSizePkx = 0;
+//
+//	*m_szPckFileName = 0;
+//	*m_tszPckFileName = 0;
+//
+//	*m_szPkxFileName = 0;
+//	*m_tszPkxFileName = 0;
+//
+//	m_Max_PckFile_Size = 0;
+//#endif
+//
+//	isWriteMode = TRUE;
+//}
 
 CMapViewFileWrite::~CMapViewFileWrite()
 {
-	//clear();
 }
-
-//void CMapViewFileWrite::clear()
-//{
-//	if(NULL != lpMapAddress)
-//		UnmapViewOfFile(lpMapAddress);
-//
-//	if(NULL != hFileMapping)
-//		CloseHandle(hFileMapping);
-//
-//	if(NULL != hFile && INVALID_HANDLE_VALUE != hFile)
-//		CloseHandle(hFile);
-//
-//	if(hasPkx){
-//
-//		if(NULL != lpMapAddress2)
-//			UnmapViewOfFile(lpMapAddress2);
-//
-//		if(NULL != hFileMapping2)
-//			CloseHandle(hFileMapping2);
-//
-//		if(NULL != hFile2 && INVALID_HANDLE_VALUE != hFile2)
-//			CloseHandle(hFile2);
-//	}
-//}
 
 #ifdef USE_MAX_SINGLE_FILESIZE
 
-BOOL CMapViewFileWrite::OpenPck(char *lpszFilename, DWORD dwCreationDisposition)
+//void CMapViewFileWrite::SetMaxSinglePckSize(QWORD qwMaxPckSize)
+//{
+//	m_Max_PckFile_Size = qwMaxPckSize;
+//}
+
+BOOL CMapViewFileWrite::OpenPck(LPCSTR lpszFilename, DWORD dwCreationDisposition)
 {
 
 	IsPckFile = TRUE;
 
 	if(Open(lpszFilename, dwCreationDisposition)){
 
-		//strcpy_s(m_szPckFilename, MAX_PATH, lpszFilename);
-
 		dwPkxSize = 0;
 		GetPkxName(m_szPkxFileName, lpszFilename);
 		dwPckSize = ::GetFileSize(hFile, NULL);
 
-		//if(MAX_PCKFILE_SIZE <= dwPckSize){
-
-			//dwMaxPckSize = dwPckSize;
-
-			OpenPkx(m_szPkxFileName, OPEN_EXISTING);
-
-		//}else{
-			//dwMaxPckSize = MAX_PCKFILE_SIZE;
-		//}
+		OpenPkx(m_szPkxFileName, OPEN_EXISTING);
 
 		uqwFullSize.qwValue = dwPckSize + dwPkxSize;
 
@@ -101,20 +93,11 @@ BOOL CMapViewFileWrite::OpenPck(LPCTSTR lpszFilename, DWORD dwCreationDispositio
 
 	if(Open(lpszFilename, dwCreationDisposition)){
 
-		//wcscpy_s(m_tszPckFileName, MAX_PATH, lpszFilename);
-
 		dwPkxSize = 0;
 		GetPkxName(m_tszPkxFileName, lpszFilename);
 		dwPckSize = ::GetFileSize(hFile, NULL);
 
-		//if(MAX_PCKFILE_SIZE <= dwPckSize){
-			//dwMaxPckSize = dwPckSize;
-
-			OpenPkx(m_tszPkxFileName, OPEN_EXISTING);
-
-		//}else{
-			//dwMaxPckSize = MAX_PCKFILE_SIZE;
-		//}
+		OpenPkx(m_tszPkxFileName, OPEN_EXISTING);
 
 		uqwFullSize.qwValue = dwPckSize + dwPkxSize;
 
@@ -126,7 +109,7 @@ BOOL CMapViewFileWrite::OpenPck(LPCTSTR lpszFilename, DWORD dwCreationDispositio
 
 }
 
-void CMapViewFileWrite::OpenPkx(char *lpszFilename, DWORD dwCreationDisposition)
+void CMapViewFileWrite::OpenPkx(LPCSTR lpszFilename, DWORD dwCreationDisposition)
 {
 	//char szFilename[MAX_PATH];
 
@@ -141,7 +124,8 @@ void CMapViewFileWrite::OpenPkx(char *lpszFilename, DWORD dwCreationDisposition)
 
 		dwPkxSize = ::GetFileSize(hFile2, NULL);
 	}else{
-		uqdwMaxPckSize.qwValue = MAX_PCKFILE_SIZE;
+		//assert(m_Max_PckFile_Size);
+		uqdwMaxPckSize.qwValue = m_Max_PckFile_Size;
 	}
 
 	hFile = hFilePck;
@@ -162,7 +146,8 @@ void CMapViewFileWrite::OpenPkx(LPCWSTR lpszFilename, DWORD dwCreationDispositio
 		dwPkxSize = ::GetFileSize(hFile2, NULL);
 
 	}else{
-		uqdwMaxPckSize.qwValue = MAX_PCKFILE_SIZE;
+		//assert(m_Max_PckFile_Size);
+		uqdwMaxPckSize.qwValue = m_Max_PckFile_Size;
 	}
 
 	hFile = hFilePck;
@@ -170,7 +155,7 @@ void CMapViewFileWrite::OpenPkx(LPCWSTR lpszFilename, DWORD dwCreationDispositio
 
 #endif
 
-BOOL CMapViewFileWrite::Open(char *lpszFilename, DWORD dwCreationDisposition)
+BOOL CMapViewFileWrite::Open(LPCSTR lpszFilename, DWORD dwCreationDisposition)
 {
 	char szFilename[MAX_PATH];
 
@@ -188,9 +173,9 @@ BOOL CMapViewFileWrite::Open(char *lpszFilename, DWORD dwCreationDisposition)
 		}
 
 	}
-
+#ifdef USE_MAX_SINGLE_FILESIZE
 	strcpy_s(m_szPckFileName, MAX_PATH, lpszFilename);
-
+#endif
 	return TRUE;
 }
 
@@ -200,30 +185,30 @@ BOOL CMapViewFileWrite::Open(LPCWSTR lpszFilename, DWORD dwCreationDisposition)
 
 	//IsPckFile = IsPckFilename(lpszFilename);
 
-	if(INVALID_HANDLE_VALUE == (hFile = CreateFile(lpszFilename, GENERIC_WRITE | GENERIC_READ, FILE_SHARE_READ, NULL, dwCreationDisposition, FILE_ATTRIBUTE_NORMAL, NULL)))
+	if(INVALID_HANDLE_VALUE == (hFile = CreateFileW(lpszFilename, GENERIC_WRITE | GENERIC_READ, FILE_SHARE_READ, NULL, dwCreationDisposition, FILE_ATTRIBUTE_NORMAL, NULL)))
 	{
 		if(isWinNt())
 		{
 			MakeUnlimitedPath(szFilename, lpszFilename, MAX_PATH);
-			if(INVALID_HANDLE_VALUE == (hFile = CreateFile(szFilename, GENERIC_READ, FILE_SHARE_READ, NULL, dwCreationDisposition, FILE_ATTRIBUTE_NORMAL, NULL)))
+			if(INVALID_HANDLE_VALUE == (hFile = CreateFileW(szFilename, GENERIC_READ, FILE_SHARE_READ, NULL, dwCreationDisposition, FILE_ATTRIBUTE_NORMAL, NULL)))
 				return FALSE;
 		}else{
 			return FALSE;
 		}
 
 	}
-
+#ifdef USE_MAX_SINGLE_FILESIZE
 	wcscpy_s(m_tszPckFileName, MAX_PATH, lpszFilename);
-
+#endif
 	return TRUE;
 }
 
-BOOL CMapViewFileWrite::Mapping(char *lpszNamespace, QWORD qwMaxSize)
+BOOL CMapViewFileWrite::Mapping(LPCSTR lpszNamespace, QWORD qwMaxSize)
 {
 #ifdef USE_MAX_SINGLE_FILESIZE
 	if(IsPckFile && (uqdwMaxPckSize.qwValue < qwMaxSize)){
 
-		if(NULL == (hFileMapping = CreateFileMappingA(hFile, NULL, PAGE_READWRITE, 0, uqdwMaxPckSize.qwValue, lpszNamespace))){
+		if(NULL == (hFileMapping = CreateFileMappingA(hFile, NULL, PAGE_READWRITE, 0, (DWORD)uqdwMaxPckSize.qwValue, lpszNamespace))){
 			return FALSE;
 		}
 
@@ -257,7 +242,7 @@ BOOL CMapViewFileWrite::Mapping(char *lpszNamespace, QWORD qwMaxSize)
 		memcpy(szNamespace_2, lpszNamespace, 16);
 		strcat_s(szNamespace_2, 16, "_2");
 
-		if(NULL == (hFileMapping2 = CreateFileMappingA(hFile2, NULL, PAGE_READWRITE, 0, dwPkxSize, szNamespace_2))){
+		if(NULL == (hFileMapping2 = CreateFileMappingA(hFile2, NULL, PAGE_READWRITE, 0, (DWORD)dwPkxSize, szNamespace_2))){
 			return FALSE;
 		}
 
@@ -321,7 +306,7 @@ DWORD CMapViewFileWrite::Write(LPVOID buffer, DWORD dwBytesToWrite)
 
 				//当Read的块在文件pck内和pkx内
 				//写pck
-				DWORD dwWriteInPck = uqdwMaxPckSize.qwValue - uqwCurrentPos.qwValue;
+				DWORD dwWriteInPck = (DWORD)(uqdwMaxPckSize.qwValue - uqwCurrentPos.qwValue);
 				DWORD dwWriteInPkx = dwBytesToWrite - dwWriteInPck;
 
 				if(!WriteFile(hFile, buffer, dwWriteInPck, &dwFileBytesWrote, NULL))

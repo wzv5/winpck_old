@@ -25,8 +25,8 @@ LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
 //
 
 VS_VERSION_INFO VERSIONINFO
- FILEVERSION 1,2,0,8
- PRODUCTVERSION 1,2,0,8
+ FILEVERSION 1,22,4,1
+ PRODUCTVERSION 1,22,4,1
  FILEFLAGSMASK 0x37L
 #ifdef _DEBUG
  FILEFLAGS 0x21L
@@ -42,12 +42,12 @@ BEGIN
         BLOCK "080404b0"
         BEGIN
             VALUE "FileDescription", "WinPCK"
-            VALUE "FileVersion", "1.2.0.8"
+            VALUE "FileVersion", "1.22.4.1"
             VALUE "InternalName", "WinPCK"
-            VALUE "LegalCopyright", "Copyright (C) 2012-2015 stsm"
+            VALUE "LegalCopyright", "Copyright (C) 2012-2017 stsm"
             VALUE "OriginalFilename", "WinPCK.exe"
             VALUE "ProductName", "WinPCK"
-            VALUE "ProductVersion", "1.2.0.8"
+            VALUE "ProductVersion", "1.22.4.1"
             VALUE "SpecialBuild", "WinPCK by stsm"
         END
     END
@@ -132,11 +132,11 @@ FONT 9, "宋体", 400, 0, 0x86
 BEGIN
     DEFPUSHBUTTON   "保存",IDOK,417,232,50,16,NOT WS_VISIBLE
     PUSHBUTTON      "关闭",IDCANCEL,363,232,50,16,NOT WS_VISIBLE
-    CONTROL         "",IDC_RICHEDIT_VIEW,"RichEdit20W",ES_MULTILINE | ES_AUTOVSCROLL | ES_AUTOHSCROLL | ES_READONLY | WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP,0,0,467,248
+    CONTROL         "",IDC_RICHEDIT_VIEW,"RichEdit20W",WS_BORDER | WS_VSCROLL | WS_HSCROLL | WS_TABSTOP | 0x8c4,0,0,467,248
     EDITTEXT        IDC_EDIT_VIEW,1,1,466,247,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY | NOT WS_VISIBLE | WS_VSCROLL
 END
 
-IDD_DIALOG_PIC DIALOGEX 0, 0, 555, 353
+IDD_DIALOG_PIC DIALOGEX 0, 0, 557, 354
 STYLE DS_SETFONT | DS_FIXEDSYS | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_VSCROLL | WS_HSCROLL | WS_SYSMENU | WS_THICKFRAME
 CAPTION "图片查看"
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
@@ -256,25 +256,45 @@ END
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_ICON_APP            ICON                    "icons\\chinaz1.ico"
+
 IDI_ICON_FILE           ICON                    "icons\\file.ico"
+
 IDI_ICON_DIR            ICON                    "icons\\dir.ico"
+
 IDI_ICON_EDIT           ICON                    "icons\\edit.ico"
+
 IDI_ICON_ADD            ICON                    "icons\\edit_add.ico"
+
 IDI_ICON_CLOSE          ICON                    "icons\\fileclose.ico"
+
 IDI_ICON_NEW            ICON                    "icons\\filenew.ico"
+
 IDI_ICON_OPEN           ICON                    "icons\\fileopen.ico"
+
 IDI_ICON_SAVE           ICON                    "icons\\filesave.ico"
+
 IDI_ICON_INFO           ICON                    "icons\\info.ico"
+
 IDI_ICON_OPT            ICON                    "icons\\lin_agt_wrench.ico"
+
 IDI_ICON_REBUILD        ICON                    "icons\\rebuild.ico"
+
 IDI_ICON_SAVEALL        ICON                    "icons\\save_all.ico"
+
 IDI_ICON_SEARCH         ICON                    "icons\\search.ico"
+
 IDI_ICON_EXIT           ICON                    "icons\\exit.ico"
+
 IDI_ICON_STOP           ICON                    "icons\\stop.ico"
+
 IDI_ICON_LOGE           ICON                    "icons\\logerror.ico"
+
 IDI_ICON_LOGI           ICON                    "icons\\loginfo.ico"
+
 IDI_ICON_LOGW           ICON                    "icons\\logwarning.ico"
+
 IDI_ICON_LOGD           ICON                    "icons\\logdebug.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -355,6 +375,7 @@ END
 //
 
 IDC_CURSOR_DROP         CURSOR                  "icons\\DROP.cur"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //

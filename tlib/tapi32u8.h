@@ -11,6 +11,8 @@
 #ifndef TAPI32U8_H
 #define TAPI32U8_H
 
+#ifdef _USE_T_U8FUNC_
+
 // UTF8 string class
 enum StrMode { BY_UTF8, BY_MBCS };
 
@@ -77,4 +79,5 @@ public:
 
 BOOL IsUTF8(const char *s);
 
+#endif
 #endif

@@ -159,7 +159,7 @@ distbits_state	 equ	(76+4+zlib1222sup)	;/* state->distbits */
 
 ALIGN 4
 _inflate_fast proc near
-.FPO (16, 4, 0, 0, 1, 0)
+; .FPO (16, 4, 0, 0, 1, 0)
 	push  edi
 	push  esi
 	push  ebp

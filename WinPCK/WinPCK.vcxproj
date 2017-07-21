@@ -1,36 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug(笑傲江湖)|Win32">
-      <Configuration>Debug(笑傲江湖)</Configuration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug(笑傲江湖)|x64">
-      <Configuration>Debug(笑傲江湖)</Configuration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug(诛仙)|Win32">
-      <Configuration>Debug(诛仙)</Configuration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Debug(诛仙)|x64">
-      <Configuration>Debug(诛仙)</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release(笑傲江湖)|Win32">
-      <Configuration>Release(笑傲江湖)</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release(笑傲江湖)|x64">
-      <Configuration>Release(笑傲江湖)</Configuration>
-      <Platform>x64</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release(诛仙)|Win32">
-      <Configuration>Release(诛仙)</Configuration>
-      <Platform>Win32</Platform>
-    </ProjectConfiguration>
-    <ProjectConfiguration Include="Release(诛仙)|x64">
-      <Configuration>Release(诛仙)</Configuration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
     <ProjectConfiguration Include="Template|Win32">
@@ -49,44 +33,23 @@
     <ProjectName>WinPCK</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <WholeProgramOptimization>false</WholeProgramOptimization>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>false</UseOfMfc>
-    <WholeProgramOptimization>false</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>false</UseOfMfc>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-    <UseOfMfc>false</UseOfMfc>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
-    <CharacterSet>Unicode</CharacterSet>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'" Label="Configuration">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -98,100 +61,60 @@
   <ImportGroup Label="ExtensionSettings">
     <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'" Label="PropertySheets">
-    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-  </ImportGroup>
-  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'" Label="PropertySheets">
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
     <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'">$(SolutionDir)\Debug\VS2010\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'">$(SolutionDir)\Debug\VS2010\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'">$(SolutionDir)\Release\VS2010\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'">$(SolutionDir)\Release\VS2010\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'">$(SolutionDir)\Debug\VS2010\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'">$(SolutionDir)\Debug\VS2010\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'">$(SolutionDir)\Release\VS2010\</OutDir>
-    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'">$(SolutionDir)\Release\VS2010\</OutDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'">$(SolutionDir)\build\VS2010\$(SolutionName)\$(PlatformShortName)\Debug\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'">$(SolutionDir)\build\VS2010\$(SolutionName)\$(PlatformShortName)\Debug\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'">$(SolutionDir)\build\VS2010\$(ProjectName)\$(PlatformShortName)\Release\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'">$(SolutionDir)\build\VS2010\$(ProjectName)\$(PlatformShortName)\Release\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'">$(SolutionDir)\build\VS2010\$(SolutionName)\$(Platform)\Debug\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'">$(SolutionDir)\build\VS2010\$(SolutionName)\$(Platform)\Debug\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'">$(SolutionDir)\build\VS2010\$(ProjectName)\$(Platform)\Release\</IntDir>
-    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'">$(SolutionDir)\build\VS2010\$(ProjectName)\$(Platform)\Release\</IntDir>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'">true</LinkIncremental>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'">true</LinkIncremental>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'">false</LinkIncremental>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'">false</LinkIncremental>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'">true</LinkIncremental>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'">true</LinkIncremental>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'">false</LinkIncremental>
-    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'">false</LinkIncremental>
-    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
-    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'" />
-    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'" />
-    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'" />
-    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'" />
-    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'" />
-    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'" />
-    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'" />
-    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'" />
-    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'" />
-    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'" />
-    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'" />
-    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'" />
-    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'" />
-    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'" />
-    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'" />
-    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'" />
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)\Debug\VS2010\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)\Release\VS2010\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\Debug\VS2010\</OutDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\Release\VS2010\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)\build\VS2010\$(SolutionName)\$(PlatformShortName)\Debug\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)\build\VS2010\$(ProjectName)\$(PlatformShortName)\Release\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(SolutionDir)\build\VS2010\$(SolutionName)\$(Platform)\Debug\</IntDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(SolutionDir)\build\VS2010\$(ProjectName)\$(Platform)\Release\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Template|x64'">AllRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Template|x64'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|Win32'" />
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Template|x64'" />
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'">$(ProjectName)(诛仙)_x86</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'">$(ProjectName)(笑傲江湖)_x86</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'">$(ProjectName)(诛仙)_x64</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'">$(ProjectName)(笑傲江湖)_x64</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'">$(ProjectName)(诛仙)_x86</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'">$(ProjectName)(笑傲江湖)_x86</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'">$(ProjectName)(诛仙)_x64</TargetName>
-    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'">$(ProjectName)(笑傲江湖)_x64</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(ProjectName)_x86</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(ProjectName)_x64</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(ProjectName)_x86</TargetName>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(ProjectName)_x64</TargetName>
   </PropertyGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;PCKV202;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>true</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
@@ -221,45 +144,10 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;PCKV203;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>true</MinimalRebuild>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <FavorSizeOrSpeed>Neither</FavorSizeOrSpeed>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
-      <StringPooling>false</StringPooling>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Precise</FloatingPointModel>
-      <EnableFiberSafeOptimizations>false</EnableFiberSafeOptimizations>
-      <WholeProgramOptimization>false</WholeProgramOptimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)base64;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir);$(SolutionDir)libpng</AdditionalIncludeDirectories>
-      <OpenMPSupport>
-      </OpenMPSupport>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>comctl32.lib;gdiplus.Lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <TargetMachine>MachineX86</TargetMachine>
-      <OptimizeReferences>
-      </OptimizeReferences>
-      <EnableCOMDATFolding>
-      </EnableCOMDATFolding>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;PCKV202;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
@@ -285,39 +173,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'">
-    <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;PCKV203;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <MinimalRebuild>false</MinimalRebuild>
-      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <StringPooling>true</StringPooling>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>comctl32.lib;gdiplus.Lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <TargetMachine>MachineX86</TargetMachine>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WIN64;_DEBUG;_WINDOWS;PCKV202;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WIN64;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -325,6 +184,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir);$(SolutionDir)libpng</AdditionalIncludeDirectories>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
     </ClCompile>
     <Link>
       <AdditionalDependencies>comctl32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -333,29 +193,10 @@
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|x64'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WIN64;_DEBUG;_WINDOWS;PCKV203;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
-      <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir);$(SolutionDir)libpng</AdditionalIncludeDirectories>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>comctl32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;PCKV202;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <PrecompiledHeader>
@@ -369,24 +210,7 @@
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'">
-    <ClCompile>
-      <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;PCKV203;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <BasicRuntimeChecks>Default</BasicRuntimeChecks>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>comctl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>true</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
@@ -404,7 +228,7 @@
       <StringPooling>true</StringPooling>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <FloatingPointModel>Fast</FloatingPointModel>
-      <StructMemberAlignment>Default</StructMemberAlignment>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
       <EnablePREfast>false</EnablePREfast>
       <CompileAsManaged>
       </CompileAsManaged>
@@ -434,60 +258,12 @@
       <GenerateDebugInformation>false</GenerateDebugInformation>
     </MASM>
   </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'">
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
       <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;PCKV203;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
-      <StringPooling>true</StringPooling>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <StructMemberAlignment>Default</StructMemberAlignment>
-      <EnablePREfast>false</EnablePREfast>
-      <CompileAsManaged>
-      </CompileAsManaged>
-      <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir);$(SolutionDir)libpng</AdditionalIncludeDirectories>
-      <PrecompiledHeaderFile>
-      </PrecompiledHeaderFile>
-      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>comctl32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <TargetMachine>MachineX86</TargetMachine>
-      <LargeAddressAware>
-      </LargeAddressAware>
-      <TerminalServerAware>
-      </TerminalServerAware>
-      <SwapRunFromCD>false</SwapRunFromCD>
-      <AssemblyDebug>
-      </AssemblyDebug>
-      <UACExecutionLevel>AsInvoker</UACExecutionLevel>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-    </Link>
-    <MASM>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-    </MASM>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|x64'">
-    <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <PreprocessorDefinitions>WIN32;_WIN64;NDEBUG;_WINDOWS;PCKV202;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WIN64;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>
       </PrecompiledHeader>
@@ -504,38 +280,7 @@
       <OmitFramePointers>false</OmitFramePointers>
       <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir);$(SolutionDir)libpng</AdditionalIncludeDirectories>
       <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
-    </ClCompile>
-    <Link>
-      <AdditionalDependencies>comctl32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
-      <SubSystem>Windows</SubSystem>
-      <OptimizeReferences>true</OptimizeReferences>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
-    </Link>
-  </ItemDefinitionGroup>
-  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|x64'">
-    <ClCompile>
-      <Optimization>MaxSpeed</Optimization>
-      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
-      <PreprocessorDefinitions>WIN32;_WIN64;NDEBUG;_WINDOWS;PCKV203;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
-      <WarningLevel>Level3</WarningLevel>
-      <DebugInformationFormat>
-      </DebugInformationFormat>
-      <IntrinsicFunctions>true</IntrinsicFunctions>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <ForceConformanceInForLoopScope>true</ForceConformanceInForLoopScope>
-      <WholeProgramOptimization>true</WholeProgramOptimization>
-      <FloatingPointModel>Fast</FloatingPointModel>
-      <BufferSecurityCheck>false</BufferSecurityCheck>
-      <StringPooling>true</StringPooling>
-      <OmitFramePointers>false</OmitFramePointers>
-      <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir);$(SolutionDir)libpng</AdditionalIncludeDirectories>
-      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
     </ClCompile>
     <Link>
       <AdditionalDependencies>comctl32.lib;gdiplus.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -548,20 +293,26 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)base64;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;PCKV202;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)base64;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir);$(SolutionDir)libdeflate</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <WarningLevel>Level3</WarningLevel>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)base64;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;PCKV202;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)DictHash;$(ProjectDir)PckClass;$(ProjectDir)PckControlCenter;$(ProjectDir)ZupClass;$(ProjectDir)dds;$(SolutionDir)zlib;$(SolutionDir)tlib;$(ProjectDir)base64;$(ProjectDir)MapViewFile;$(ProjectDir)PckVersion;$(ProjectDir);$(SolutionDir)libdeflate</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\tlib\tapi32u8.cpp" />
+    <ClCompile Include="..\tlib\tini.cpp" />
+    <ClCompile Include="..\tlib\tlist.cpp" />
+    <ClCompile Include="..\tlib\tregist.cpp" />
     <ClCompile Include=".\DictHash\DictHash.cpp" />
     <ClCompile Include=".\dds\DDSTextureLoader.cpp" />
     <ClCompile Include="BuildDIB.cpp" />
@@ -569,9 +320,13 @@
     <ClCompile Include="MapViewFile\MapViewFileRead.cpp" />
     <ClCompile Include="MapViewFile\MapViewFileWrite.cpp" />
     <ClCompile Include="PckClass\PckClassAllocFunctions.cpp" />
+    <ClCompile Include="PckClass\PckClassCompress.cpp" />
+    <ClCompile Include="PckClass\PckClassExceptionRestore.cpp" />
     <ClCompile Include="PckClass\PckClassFeedback.cpp" />
     <ClCompile Include="PckClass\PckClassHelpFunction.cpp" />
     <ClCompile Include="PckClass\PckClassMount.cpp" />
+    <ClCompile Include="PckClass\PckClassReader.cpp" />
+    <ClCompile Include="PckClass\PckClassVersionDetect.cpp" />
     <ClCompile Include="PckControlCenter\PckControlCenter.cpp" />
     <ClCompile Include="PckControlCenter\PckControlCenterAttribute.cpp" />
     <ClCompile Include="PckControlCenter\PckControlCenterLog.cpp" />
@@ -588,17 +343,14 @@
     <ClCompile Include="helpfunc.cpp" />
     <ClCompile Include="mainfunc.cpp" />
     <ClCompile Include="miscdecode.cpp">
-      <StructMemberAlignment Condition="'$(Configuration)|$(Platform)'=='Debug(诛仙)|Win32'">1Byte</StructMemberAlignment>
-      <StructMemberAlignment Condition="'$(Configuration)|$(Platform)'=='Debug(笑傲江湖)|Win32'">1Byte</StructMemberAlignment>
-      <StructMemberAlignment Condition="'$(Configuration)|$(Platform)'=='Release(诛仙)|Win32'">1Byte</StructMemberAlignment>
-      <StructMemberAlignment Condition="'$(Configuration)|$(Platform)'=='Release(笑傲江湖)|Win32'">1Byte</StructMemberAlignment>
+      <StructMemberAlignment Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">1Byte</StructMemberAlignment>
+      <StructMemberAlignment Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">1Byte</StructMemberAlignment>
     </ClCompile>
     <ClCompile Include="miscdlg.cpp" />
     <ClCompile Include=".\PckClass\PckClass.cpp" />
     <ClCompile Include=".\PckClass\PckClassExtract.cpp" />
     <ClCompile Include="PckClass\PckClassMainFunction.cpp" />
     <ClCompile Include=".\PckClass\PckClassThread.cpp" />
-    <ClCompile Include="PckVersion\PckVersion.cpp" />
     <ClCompile Include="threadproc.cpp" />
     <ClCompile Include="winmain.cpp" />
     <ClCompile Include=".\ZupClass\ZupClass.cpp" />
@@ -610,11 +362,24 @@
     <ResourceCompile Include="WinPCK.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\tlib\tapi32ex.h" />
+    <ClInclude Include="..\tlib\tapi32u8.h" />
+    <ClInclude Include="..\tlib\tconf.h" />
+    <ClInclude Include="..\tlib\tini.h" />
+    <ClInclude Include="..\tlib\tlib.h" />
+    <ClInclude Include="..\tlib\tlist.h" />
+    <ClInclude Include="..\tlib\tregist.h" />
     <ClInclude Include=".\DictHash\DictHash.h" />
     <ClInclude Include=".\dds\DDS.h" />
     <ClInclude Include=".\dds\DDSTextureLoader.h" />
     <ClInclude Include=".\dds\dxgiformat.h" />
     <ClInclude Include="MapViewFile\MapViewFile.h" />
+    <ClInclude Include="PckClass\PckClassCompress.h" />
+    <ClInclude Include="PckClass\PckClassExceptionRestore.h" />
+    <ClInclude Include="PckClass\PckClassReader.h" />
+    <ClInclude Include="PckClass\PckClassThreadCompressFunctions.h" />
+    <ClInclude Include="PckClass\PckClassVersionDetect.h" />
+    <ClInclude Include="PckClass\PckClassVersionDetectFunctionDefinitions.h" />
     <ClInclude Include="PckClass\PckConf.h" />
     <ClInclude Include="PckClass\PckDefines.h" />
     <ClInclude Include="PckClass\PckStructs.h" />
@@ -625,7 +390,6 @@
     <ClInclude Include="miscpicdlg.h" />
     <ClInclude Include=".\PckClass\PckClass.h" />
     <ClInclude Include=".\PckClass\PckHeader.h" />
-    <ClInclude Include="PckVersion\PckVersion.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="winmain.h" />
     <ClInclude Include=".\ZupClass\ZupClass.h" />
@@ -660,6 +424,9 @@
   <ItemGroup>
     <ProjectReference Include="..\base64\base64.vcxproj">
       <Project>{4526ffba-6cee-4c01-8d22-535617fe88e5}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\libdeflate\libdeflate.vcxproj">
+      <Project>{2a3f22c4-d534-497b-82fc-f92a634fb20f}</Project>
     </ProjectReference>
     <ProjectReference Include="..\zlib\zlib.vcxproj">
       <Project>{1d5981bc-51af-4748-9ef6-9458e10abba4}</Project>

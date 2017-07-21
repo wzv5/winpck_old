@@ -150,3 +150,4 @@ typedef struct _TGAHEAD {
 #pragma pack(pop)
 
 #endif
+

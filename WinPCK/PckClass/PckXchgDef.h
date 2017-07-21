@@ -11,7 +11,6 @@
 
 #pragma once
 
-class CPckVersion;
 class CPckControlCenter;
 
 typedef struct _PCK_VARIETY_PARAMS {
@@ -39,22 +38,6 @@ typedef struct _PCK_VARIETY_PARAMS {
 
 
 typedef struct _PCK_RUNTIME_PARAMS {
-
-	//DWORD		dwOldFileCount;
-	//DWORD		dwPrepareToAddFileCount;
-	//DWORD		dwChangedFileCount;
-	//DWORD		dwFinalFileCount;
-
-	//DWORD		dwUseNewDataAreaInDuplicateFileSize;
-	//DWORD		dwDataAreaSize;
-	//DWORD		dwRedundancyDataSize;
-
-	//LPCSTR		lpszAdditionalInfo;
-	//DWORD		dwUIProgress;
-	//DWORD		dwUIProgressUpper;
-
-
-	//DWORD		dwMTMemoryUsed;
 	
 	PCK_VARIETY_PARAMS	cVarParams;
 
@@ -65,12 +48,8 @@ typedef struct _PCK_RUNTIME_PARAMS {
 
 	DWORD		dwCompressLevel;
 
-
-
-	CPckVersion	*lpPckVersion;
 	CPckControlCenter	*lpPckControlCenter;
 
-	//int			iSelectedItem;
 	int			iListHotItem;
 
 }PCK_RUNTIME_PARAMS, *LPPCK_RUNTIME_PARAMS;

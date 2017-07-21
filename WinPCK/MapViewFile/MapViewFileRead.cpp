@@ -11,49 +11,18 @@
 
 #include "MapViewFile.h"
 
-
-
 CMapViewFileRead::CMapViewFileRead()
 {
-	//hFile  = hFile2 = hFileMapping  = hFileMapping2 = NULL;
-	//lpMapAddress  = lpMapAddress2 = NULL;
-	//IsPckFile = hasPkx = isCrossView = FALSE;
-
-	//dwCurrentPos = 0;
-
-	//lpCrossBuffer = NULL;
-
 	isWriteMode = FALSE;
 }
 
 CMapViewFileRead::~CMapViewFileRead()
 {
-	//clear();
 }
-
-//void CMapViewFileRead::clear()
-//{
-//	UnmapView();
-//
-//	if(NULL != hFileMapping)
-//		CloseHandle(hFileMapping);
-//
-//	if(NULL != hFile && INVALID_HANDLE_VALUE != hFile)
-//		CloseHandle(hFile);
-//
-//	if(hasPkx){
-//
-//		if(NULL != hFileMapping2)
-//			CloseHandle(hFileMapping2);
-//
-//		if(NULL != hFile2 && INVALID_HANDLE_VALUE != hFile2)
-//			CloseHandle(hFile2);
-//	}
-//}
 
 #ifdef USE_MAX_SINGLE_FILESIZE
 
-BOOL CMapViewFileRead::OpenPck(char* lpszFilename)
+BOOL CMapViewFileRead::OpenPck(LPCSTR lpszFilename)
 {
 
 	IsPckFile = TRUE;
@@ -103,8 +72,6 @@ BOOL CMapViewFileRead::OpenPck(LPCWSTR lpszFilename)
 
 	if(Open(lpszFilename)){
 
-		
-
 		dwPkxSize = 0;
 		dwPckSize = ::GetFileSize(hFile, NULL);
 
@@ -142,7 +109,7 @@ BOOL CMapViewFileRead::OpenPck(LPCWSTR lpszFilename)
 }
 #endif
 
-BOOL CMapViewFileRead::Open(char *lpszFilename)
+BOOL CMapViewFileRead::Open(LPCSTR lpszFilename)
 {
 	char szFilename[MAX_PATH];
 
@@ -157,9 +124,9 @@ BOOL CMapViewFileRead::Open(char *lpszFilename)
 			return FALSE;
 		}
 	}
-
+#ifdef USE_MAX_SINGLE_FILESIZE
 	strcpy_s(m_szPckFileName, MAX_PATH, lpszFilename);
-
+#endif
 	return TRUE;
 }
 
@@ -167,25 +134,25 @@ BOOL CMapViewFileRead::Open(LPCWSTR lpszFilename)
 {
 	WCHAR szFilename[MAX_PATH];
 
-	if(INVALID_HANDLE_VALUE == (hFile = CreateFile(lpszFilename, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL)))
+	if(INVALID_HANDLE_VALUE == (hFile = CreateFileW(lpszFilename, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL)))
 	{
 		if(isWinNt())
 		{
 			MakeUnlimitedPath(szFilename, lpszFilename, MAX_PATH);
-			if(INVALID_HANDLE_VALUE == (hFile = CreateFile(szFilename, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL)))
+			if(INVALID_HANDLE_VALUE == (hFile = CreateFileW(szFilename, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, OPEN_EXISTING, FILE_FLAG_SEQUENTIAL_SCAN, NULL)))
 				return FALSE;
 		}else{
 			return FALSE;
 		}
 
 	}
-
+#ifdef USE_MAX_SINGLE_FILESIZE
 	wcscpy_s(m_tszPckFileName, MAX_PATH, lpszFilename);
-
+#endif
 	return TRUE;
 }
 
-BOOL CMapViewFileRead::Mapping(char *lpszNamespace)
+BOOL CMapViewFileRead::Mapping(LPCSTR lpszNamespace)
 {
 	if(NULL == (hFileMapping = CreateFileMappingA(hFile, NULL, PAGE_READONLY, 0, 0, lpszNamespace))){
 

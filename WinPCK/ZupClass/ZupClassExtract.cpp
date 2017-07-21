@@ -9,8 +9,9 @@
 // 2012.5.23
 //////////////////////////////////////////////////////////////////////
 
-#include "zlib.h"
 #include "ZupClass.h"
+
+#pragma warning ( disable : 4267 )
 
 BOOL CZupClass::GetSingleFileData(LPVOID lpvoidFileRead, LPPCKINDEXTABLE lpZupFileIndexTable, char *buffer, size_t sizeOfBuffer)
 {
@@ -25,18 +26,13 @@ BOOL CZupClass::GetSingleFileData(LPVOID lpvoidFileRead, LPPCKINDEXTABLE lpZupFi
 		DWORD	dwFileLengthDecompress2 = lpZupFileIndexTable->cFileIndex.dwFileClearTextSize;
 		DWORD	dwFileLengthDecompress1 = lpPckFileIndexTable->cFileIndex.dwFileClearTextSize;
 
-		//lpZupFileIndexTable->cFileIndex.dwFileCipherTextSize = lpPckFileIndexTable->cFileIndex.dwFileClearTextSize
-
 		if(0 != sizeOfBuffer && sizeOfBuffer < dwFileLengthDecompress2){
 			dwFileLengthDecompress2 = sizeOfBuffer;
 			if(sizeOfBuffer < dwFileLengthDecompress1)
 				dwFileLengthDecompress1 = sizeOfBuffer;
 		}
 
-
-		//char	*_cipherbuf = (char*) malloc (lpZupFileIndexTable->cFileIndex.dwFileClearTextSize);
 		char	*_cipherbuf = (char*) malloc (dwFileLengthDecompress1);
-
 
 		if(NULL == _cipherbuf)
 		{
@@ -50,16 +46,13 @@ BOOL CZupClass::GetSingleFileData(LPVOID lpvoidFileRead, LPPCKINDEXTABLE lpZupFi
 
 			if(PCK_BEGINCOMPRESS_SIZE < lpZupFileIndexTable->cFileIndex.dwFileClearTextSize)
 			{
-				int rtn = uncompress((BYTE*)buffer, &dwFileLengthDecompress2,
-							(BYTE*)_cipherbuf + 4, dwFileLengthDecompress1 - 4/*lpZupFileIndexTable->cFileIndex.dwFileCipherTextSize*/);
 
-				//if(Z_OK != uncompress((BYTE*)buffer, &lpZupFileIndexTable->cFileIndex.dwFileClearTextSize,
-				//			(BYTE*)_cipherbuf + 4, lpZupFileIndexTable->cFileIndex.dwFileCipherTextSize))
-				if(Z_OK != rtn && !((Z_BUF_ERROR == rtn) && (dwFileLengthDecompress2 < lpZupFileIndexTable->cFileIndex.dwFileClearTextSize)) )
+				if(decompress_part((BYTE*)buffer, &dwFileLengthDecompress2,
+							(BYTE*)_cipherbuf + 4, dwFileLengthDecompress1 - 4, lpZupFileIndexTable->cFileIndex.dwFileClearTextSize))
 				{
 					if(lpZupFileIndexTable->cFileIndex.dwFileClearTextSize == lpZupFileIndexTable->cFileIndex.dwFileCipherTextSize)
 					{
-						memcpy(buffer, _cipherbuf + 4, dwFileLengthDecompress2/*lpZupFileIndexTable->cFileIndex.dwFileClearTextSize*/);
+						memcpy(buffer, _cipherbuf + 4, dwFileLengthDecompress2);
 					}
 					else
 					{
@@ -69,14 +62,12 @@ BOOL CZupClass::GetSingleFileData(LPVOID lpvoidFileRead, LPPCKINDEXTABLE lpZupFi
 					}
 				}
 			}else{
-				memcpy(buffer, _cipherbuf + 4, dwFileLengthDecompress2/*lpZupFileIndexTable->cFileIndex.dwFileClearTextSize*/);
+				memcpy(buffer, _cipherbuf + 4, dwFileLengthDecompress2);
 			}
 
-			//在此处直接解压
 			free(_cipherbuf);
 
 		}else{
-			//在此处直接解压
 			free(_cipherbuf);
 			return FALSE;
 		}

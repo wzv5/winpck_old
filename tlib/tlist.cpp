@@ -14,6 +14,9 @@ static char *tlist_id =
 /*
 	TList class
 */
+
+#ifdef _USE_T_LIST_
+
 TList::TList(void)
 {
 	Init();
@@ -110,3 +113,4 @@ void TRecycleList::PutObj(int list_type, TListObj *obj)
 	list[list_type].AddObj(obj);
 }
 
+#endif

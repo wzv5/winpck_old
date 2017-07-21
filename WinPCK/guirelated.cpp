@@ -12,10 +12,10 @@
 #pragma warning ( disable : 4312 )
 #pragma warning ( disable : 4311 )
 #pragma warning ( disable : 4005 )
+#pragma warning ( disable : 4302 )
 
 #include "winmain.h"
-//#include "globals.h"
-#include <strsafe.h>
+#include <tchar.h>
 
 #ifdef _USE_CUSTOMDRAW_
 typedef enum {R_NOTHINGS=0, R_NORMAL, R_SELECT, R_SEL_NOFOCUS} redrawmode;
@@ -85,9 +85,13 @@ void TInstDlg::initParams()
 	SYSTEM_INFO sysinfo;								//定义结构对象
 	GetSystemInfo(&sysinfo);							//获取当前机器的信息
 	lpPckParams->dwMTThread = sysinfo.dwNumberOfProcessors;	//获取当前机器的CPU个数;
+#ifdef _DEBUG
+	lpPckParams->dwMTMaxThread = 50;
+#else
 	lpPckParams->dwMTMaxThread = sysinfo.dwNumberOfProcessors + ((sysinfo.dwNumberOfProcessors + (sysinfo.dwNumberOfProcessors & 1))>>1);
+#endif
 
-	lpPckParams->dwCompressLevel = 9;
+	lpPckParams->dwCompressLevel = Z_DEFAULT_COMPRESS_LEVEL;
 	lpPckParams->dwMTMaxMemory = MT_MAX_MEMORY;
 
 	m_DropFileCount = 0;
@@ -96,8 +100,8 @@ void TInstDlg::initParams()
 	m_isSearchWindow = FALSE;
 
 	//Timer
-	StringCchCopy(szTimerProcessingFormatString, 64, GetLoadStr(IDS_STRING_TIMERING));
-	StringCchCopy(szTimerProcessedFormatString, 64, GetLoadStr(IDS_STRING_TIMEROK));
+	_tcscpy_s(szTimerProcessingFormatString, GetLoadStr(IDS_STRING_TIMERING));
+	_tcscpy_s(szTimerProcessedFormatString, GetLoadStr(IDS_STRING_TIMEROK));
 
 
 #ifdef _WIN64
@@ -351,10 +355,10 @@ LPTSTR* argv;
 		//MessageBox(argv[0]);
 		//MessageBox(argv[1]);
 
-		StringCchCopy(m_MyFileName, MAX_PATH, argv[0]);
+		_tcscpy_s(m_MyFileName, argv[0]);
 
 		if(argc > 1){
-			StringCchCopy(m_Filename, MAX_PATH, argv[1]);
+			_tcscpy_s(m_Filename, argv[1]);
 		}
 		LocalFree(argv);
 
@@ -362,8 +366,8 @@ LPTSTR* argv;
 		//初始化路径
 		if(2 > argc)
 		{
-			StringCchCopy(m_Filename, MAX_PATH, m_CurrentPath);
-			StringCchCat(m_Filename, MAX_PATH, TEXT("\\"));
+			_tcscpy_s(m_Filename, m_CurrentPath);
+			_tcscat_s(m_Filename, TEXT("\\"));
 		}else{
 			OpenPckFile(m_Filename);
 		}

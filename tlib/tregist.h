@@ -4,6 +4,8 @@
 
 #define MAX_KEYARRAY	30
 
+#ifdef _USE_T_REG_
+
 class TRegistry {
 protected:
 	HKEY	topKey;
@@ -54,5 +56,6 @@ public:
 
 };
 
+#endif
 
 #endif

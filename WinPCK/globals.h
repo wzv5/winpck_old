@@ -11,32 +11,19 @@
 
 //#define _WIN32_WINNT 0x0501
 
-
 #ifndef _GLOBALS_H_
 #define _GLOBALS_H_
 
-//#include "../tlib/tlib.h"
 #include <windows.h>
-//#include "resource.h"
-
 
 //****** some defines *******
 //#define _USE_CUSTOMDRAW_
 
 
 #define	THIS_NAME			"WinPCK "
-
-#define	THIS_VERSION		"v1.20.8 "
-//#define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 " 
-#ifdef PCKV202
-#define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 (完美世界+诛仙+武林外传+圣斗士等)" 
-							//"(完美世界+诛仙+武林外传+圣斗士等)"
-#elif defined PCKV203
-#define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器 (笑傲江湖)" 
-							//"(笑傲江湖)"
-#endif
+#define	THIS_VERSION		"v1.22.4 "
+#define	THIS_DESC			"完美世界系列游戏PCK文件包综合查看器" 
 #define	THIS_AUTHOR			"程序编写 stsm/liqf/李秋枫\r\nE-Mail: stsm85@126.com"
-
 
 #define TEXT_PROCESS_ERROR	"操作未能正常结束"
 
@@ -63,22 +50,15 @@
 										TEXT(	"所有文件\0*.*\0\0")
 
 
+#define Z_DEFAULT_COMPRESS_LEVEL	9
 
 #define WM_FRESH_MAIN_CAPTION		(WM_USER + 1)
 #define WM_TIMER_PROGRESS_100		(WM_USER + 1)
 
 #define	TIMER_PROGRESS				100
 
-//#define	FMT_RAW			0	//bmp,jpg,png,gif,emf.....
-//#define	FMT_DDS			1
-//#define	FMT_TGA			2
-
 #define	MAX_BUFFER_SIZE_OFN			0xFFFFF
-
-
-
 #define	MT_MAX_MEMORY				0x40000000	//1024MB
-
 
 #ifndef SE_CREATE_SYMBOLIC_LINK_NAME
 #define SE_CREATE_SYMBOLIC_LINK_NAME  TEXT("SeCreateSymbolicLinkPrivilege")
@@ -103,7 +83,5 @@
 #define FILL_COLOR_GREEN			RGB(232,254,255)
 
 #endif
-
-//BOOL GetWndPath(HWND hWnd, TCHAR * szPath);
 
 #endif

@@ -11,7 +11,6 @@
 #ifndef TAPI32EX_H
 #define TAPI32EX_H
 
-#include <richedit.h>
 
 #define CP_UTF8                   65001       // UTF-8 translation
 inline int AtoW(const char *src, WCHAR *dst, int bufsize, int max_len=-1) {
@@ -20,6 +19,8 @@ inline int AtoW(const char *src, WCHAR *dst, int bufsize, int max_len=-1) {
 inline int WtoA(const WCHAR *src, char *dst, int bufsize, int max_len=-1) {
 	return	::WideCharToMultiByte(CP_ACP, 0, src, max_len, dst, bufsize, 0, 0);
 }
+
+
 
 WCHAR *AtoW(const char *src, BOOL noStatic=FALSE);
 
@@ -140,6 +141,8 @@ DEFINE_GUID(IID_IShellLinkW, 0x000214F9, \
 #define BIF_SHAREABLE			0x8000
 
 #endif
+
+#ifdef _USE_T_CRYPT_
 
 // CryptoAPI for VC4
 #ifndef MS_DEF_PROV
@@ -375,4 +378,5 @@ BOOL TLibInit_AdvAPI32();
 //BOOL TLibInit_Ntdll();
 BOOL TGenRandom(void *buf, int len);
 
+#endif
 #endif

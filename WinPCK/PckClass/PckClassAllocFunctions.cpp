@@ -38,17 +38,14 @@ BOOL CPckClass::AllocIndexTableAndInit(LPPCKINDEXTABLE &lpPckIndexTable, DWORD d
 	//…Í«Îø’º‰
 	if(NULL == (lpPckIndexTable = (LPPCKINDEXTABLE) malloc (sizeof(PCKINDEXTABLE) * dwFileCount)))
 	{
-		//lstrcpy(m_lastErrorString, TEXT_MALLOC_FAIL);
 		PrintLogE(TEXT_MALLOC_FAIL, __FILE__, __FUNCTION__, __LINE__);
-		//delete lpcReadfile;
 		return FALSE;
-
 	}
 
 	memset(lpPckIndexTable, 0, sizeof(PCKINDEXTABLE) * dwFileCount);
 
 #ifdef _DEBUG
-	sprintf(szDebug, "%s:%d", __FUNCTION__, GetTickCount() - take);
+	sprintf_s(szDebug, "%s:%d", __FUNCTION__, GetTickCount() - take);
 	PrintLogD(szDebug);
 #endif
 	return TRUE;
@@ -64,6 +61,7 @@ VOID CPckClass::DeallocateFileinfo()
 		free(m_firstFile);
 		m_firstFile = Fileinfo;
 	}
+	//m_firstFile = NULL;
 }
 
 LPFILES_TO_COMPRESS CPckClass::AllocateFileinfo()

@@ -2,6 +2,8 @@
 #ifndef TINI_H
 #define TINI_H
 
+#ifdef _USE_T_INI_
+
 #include "tlist.h"
 
 #define MAX_KEYARRAY	30
@@ -85,8 +87,10 @@ protected:
 	BOOL GetFileInfo(LPTSTR fname, FILETIME *ft, int *size);///
 	TIniSection *SearchSection(const char *section);
 	BOOL WriteIni();
+#ifdef _USE_T_CRYPT_
 	BOOL Lock();
 	void UnLock();
+#endif
 
 public:
 	TInifile(const char *ini_name=NULL);
@@ -99,10 +103,14 @@ public:
 	BOOL SetStr(const char *key, const char *val);
 	DWORD GetStr(const char *key, char *val, int max_size, const char *default_val="");
 	BOOL SetInt(const char *key, int val);
+	BOOL SetInt64(const char *key, __int64 val);
 	BOOL DelSection(const char *section);
 	BOOL DelKey(const char *key);
 	int GetInt(const char *key, int default_val=-1);
+	__int64 GetInt64(const char *key, __int64 default_val=-1);
 	const char *GetIniFileName(void) { return	ini_file; }
 };
+
+#endif
 
 #endif

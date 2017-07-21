@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -19,40 +19,49 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4526FFBA-6CEE-4C01-8D22-535617FE88E5}</ProjectGuid>
+    <ProjectGuid>{2A3F22C4-D534-497B-82FC-F92A634FB20F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>base64</RootNamespace>
+    <RootNamespace>libdeflate</RootNamespace>
+    <ProjectName>libdeflate</ProjectName>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <CharacterSet>Unicode</CharacterSet>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>Intel C++ Compiler XE 15.0</PlatformToolset>
-    <InterproceduralOptimization>true</InterproceduralOptimization>
+    <CharacterSet>NotSet</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseIntelIPP>Parallel_Static</UseIntelIPP>
+    <UseIntelTBB>true</UseIntelTBB>
+    <InstrumentIntelTBB>true</InstrumentIntelTBB>
+    <UseIntelDAAL>Parallel_Static</UseIntelDAAL>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>NotSet</CharacterSet>
-    <PlatformToolset>Intel C++ Compiler XE 15.0</PlatformToolset>
-    <InterproceduralOptimization>true</InterproceduralOptimization>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseIntelIPP>false</UseIntelIPP>
+    <UseIntelTBB>false</UseIntelTBB>
+    <InstrumentIntelTBB>false</InstrumentIntelTBB>
+    <UseIntelDAAL>false</UseIntelDAAL>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -67,21 +76,25 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IntDir>$(SolutionDir)\build\VS2010\$(ProjectName)\$(PlatformShortName)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)\$(Configuration)\VS2010\libs\$(PlatformShortName)\</OutDir>
-  </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IntDir>$(SolutionDir)\build\VS2010\$(ProjectName)\$(PlatformShortName)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)\$(Configuration)\VS2010\libs\$(PlatformShortName)\</OutDir>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IntDir>$(SolutionDir)\build\VS2010\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)\$(Configuration)\VS2010\libs\$(Platform)\</OutDir>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\$(Configuration)\VS2015\libs\$(PlatformShortName)\</OutDir>
+    <IntDir>$(SolutionDir)\build\VS2015\$(ProjectName)\$(PlatformShortName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IntDir>$(SolutionDir)\build\VS2010\$(ProjectName)\$(Platform)\$(Configuration)\</IntDir>
-    <OutDir>$(SolutionDir)$(Configuration)\VS2010\libs\$(Platform)\</OutDir>
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)\$(Configuration)\VS2015\libs\$(PlatformShortName)\</OutDir>
+    <IntDir>$(SolutionDir)\build\VS2015\$(ProjectName)\$(PlatformShortName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\$(Configuration)\VS2015\libs\$(PlatformShortName)\</OutDir>
+    <IntDir>$(SolutionDir)\build\VS2015\$(ProjectName)\$(PlatformShortName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)\$(Configuration)\VS2015\libs\$(PlatformShortName)\</OutDir>
+    <IntDir>$(SolutionDir)\build\VS2015\$(ProjectName)\$(PlatformShortName)\$(Configuration)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -89,7 +102,13 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBDEFLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <StringPooling>
+      </StringPooling>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -102,7 +121,11 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LIBDEFLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
+      <StringPooling>
+      </StringPooling>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -114,20 +137,19 @@
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBDEFLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
-      <AssemblerOutput>NoListing</AssemblerOutput>
-      <UseProcessorExtensions>SSE3</UseProcessorExtensions>
-      <Parallelization>false</Parallelization>
-      <GenerateAlternateCodePaths>SSE3</GenerateAlternateCodePaths>
-      <Cpp0xSupport>true</Cpp0xSupport>
-      <ExceptionHandling>false</ExceptionHandling>
-      <StringPooling>true</StringPooling>
+      <StringPooling>false</StringPooling>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
+      <AssemblerOutput>AssemblyAndSourceCode</AssemblerOutput>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <Optimization>Full</Optimization>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -141,19 +163,20 @@
       <WarningLevel>Level3</WarningLevel>
       <PrecompiledHeader>
       </PrecompiledHeader>
-      <Optimization>MaxSpeedHighLevel</Optimization>
-      <FunctionLevelLinking>true</FunctionLevelLinking>
-      <IntrinsicFunctions>false</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <FunctionLevelLinking>
+      </FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;LIBDEFLATE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
-      <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
-      <FloatingPointModel>Fast</FloatingPointModel>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <StringPooling>false</StringPooling>
+      <EnableEnhancedInstructionSet>StreamingSIMDExtensions2</EnableEnhancedInstructionSet>
       <GenerateAlternateCodePaths>SSE3</GenerateAlternateCodePaths>
       <UseProcessorExtensions>SSE3</UseProcessorExtensions>
-      <Cpp0xSupport>true</Cpp0xSupport>
-      <ExceptionHandling>false</ExceptionHandling>
-      <StringPooling>true</StringPooling>
+      <Optimization>Full</Optimization>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <StructMemberAlignment>16Bytes</StructMemberAlignment>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -163,18 +186,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="ReadMe.txt" />
+    <ClInclude Include="adler32_impl.h" />
+    <ClInclude Include="aligned_malloc.h" />
+    <ClInclude Include="bt_matchfinder.h" />
+    <ClInclude Include="common_defs.h" />
+    <ClInclude Include="compiler_msc.h" />
+    <ClInclude Include="decompress_impl.h" />
+    <ClInclude Include="deflate_compress.h" />
+    <ClInclude Include="deflate_constants.h" />
+    <ClInclude Include="hc_matchfinder.h" />
+    <ClInclude Include="libdeflate.h" />
+    <ClInclude Include="lib_common.h" />
+    <ClInclude Include="matchfinder_avx2.h" />
+    <ClInclude Include="matchfinder_common.h" />
+    <ClInclude Include="matchfinder_sse2.h" />
+    <ClInclude Include="msvc_conf.h" />
+    <ClInclude Include="unaligned.h" />
+    <ClInclude Include="x86_cpu_features.h" />
+    <ClInclude Include="zlib_constants.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="base64.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="base64.c" />
-    <ClCompile Include="base64_decoder.c" />
-    <ClCompile Include="base64_encoder.c" />
+    <ClCompile Include="adler32.c" />
+    <ClCompile Include="aligned_malloc.c" />
+    <ClCompile Include="deflate_compress.c" />
+    <ClCompile Include="deflate_decompress.c" />
+    <ClCompile Include="zlib_compress.c" />
+    <ClCompile Include="zlib_decompress.c" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\masm.targets" />
   </ImportGroup>
 </Project>

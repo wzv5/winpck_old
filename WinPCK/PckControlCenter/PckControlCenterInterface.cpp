@@ -19,7 +19,7 @@ CONST int	CPckControlCenter::GetListCurrentHotItem()
 	return cParams.iListHotItem;
 }
 
-void		CPckControlCenter::SetListCurrentHotItem(int _val)
+void CPckControlCenter::SetListCurrentHotItem(int _val)
 {
 	cParams.iListHotItem = _val;
 }
@@ -29,14 +29,14 @@ CONST BOOL	CPckControlCenter::GetListInSearchMode()
 	return m_isSearchMode;
 }
 
-void		CPckControlCenter::SetListInSearchMode(BOOL _val)
+void CPckControlCenter::SetListInSearchMode(BOOL _val)
 {
 	m_isSearchMode = _val;
 }
 
 LPCTSTR	CPckControlCenter::GetSaveDlgFilterString()
 {
-	return cParams.lpPckVersion->GetSaveDlgFilterString();
+	return m_lpClassPck->GetSaveDlgFilterString();//cParams.lpPckVersion->GetSaveDlgFilterString();
 }
 
 BOOL CPckControlCenter::isSupportAddFileToPck()

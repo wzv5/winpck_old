@@ -11,8 +11,6 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "PckControlCenter.h"
-
-#include "PckVersion.h"
 #include "PckClass.h"
 	
 CPckControlCenter::CPckControlCenter()
@@ -23,7 +21,6 @@ CPckControlCenter::CPckControlCenter()
 
 CPckControlCenter::CPckControlCenter(HWND hWnd)
 {
-	//hWndMain = hWnd;
 	m_hWndMain = hWnd;
 
 	init();
@@ -32,7 +29,6 @@ CPckControlCenter::CPckControlCenter(HWND hWnd)
 
 CPckControlCenter::~CPckControlCenter()
 {
-	delete cParams.lpPckVersion;
 }
 
 void CPckControlCenter::init()
@@ -48,7 +44,7 @@ void CPckControlCenter::init()
 
 	m_emunFileFormat = FMTPCK_UNKNOWN;
 
-	cParams.lpPckVersion = new CPckVersion();
+	//cParams.lpPckVersion = new CPckVersion();
 	cParams.lpPckControlCenter = this;
 }
 

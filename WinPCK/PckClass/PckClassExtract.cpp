@@ -10,7 +10,7 @@
 // 2012.4.10
 //////////////////////////////////////////////////////////////////////
 
-#include "zlib.h"
+//#include "zlib.h"
 #include "PckClass.h"
 
 
@@ -25,7 +25,7 @@ BOOL CPckClass::GetSingleFileData(LPVOID lpvoidFileRead, LPPCKINDEXTABLE lpPckFi
 	{
 		lpFileRead = new CMapViewFileRead();
 
-		if(!OpenPckAndMappingRead(lpFileRead, m_PckAllInfo.szFilename)){
+		if(!OpenPckAndMappingRead(lpFileRead, m_PckAllInfo.szFilename, m_szMapNameRead)){
 			delete lpFileRead;
 			return FALSE;
 		}
@@ -51,12 +51,9 @@ BOOL CPckClass::GetSingleFileData(LPVOID lpvoidFileRead, LPPCKINDEXTABLE lpPckFi
 
 	if(PCK_BEGINCOMPRESS_SIZE < lpPckFileIndex->dwFileClearTextSize)
 	{
-		int rtn = uncompress((BYTE*)buffer, &dwFileLengthToWrite,
-					lpMapAddress, lpPckFileIndex->dwFileCipherTextSize);
 
-		//if(Z_OK != uncompress((BYTE*)buffer, &dwFileLengthToWrite,
-		//			lpMapAddress, lpPckFileIndex->dwFileCipherTextSize))
-		if(Z_OK != rtn && !((Z_BUF_ERROR == rtn) && (dwFileLengthToWrite < lpPckFileIndex->dwFileClearTextSize)) )
+		if(!decompress_part((BYTE*)buffer, &dwFileLengthToWrite,
+					lpMapAddress, lpPckFileIndex->dwFileCipherTextSize, lpPckFileIndex->dwFileClearTextSize))
 		{
 			if(lpPckFileIndex->dwFileClearTextSize == lpPckFileIndex->dwFileCipherTextSize)
 				memcpy(buffer, lpMapAddress, dwFileLengthToWrite);
@@ -95,14 +92,14 @@ BOOL CPckClass::ExtractFiles(LPPCKINDEXTABLE *lpIndexToExtract, int nFileCount)
 
 	CMapViewFileRead	*lpFileRead = new CMapViewFileRead();
 
-	if(!OpenPckAndMappingRead(lpFileRead, m_PckAllInfo.szFilename)){
+	if(!OpenPckAndMappingRead(lpFileRead, m_PckAllInfo.szFilename, m_szMapNameRead)){
 		delete lpFileRead;
 		return FALSE;
 	}
 	
 	BOOL	ret = TRUE;
 
-	char	szFilename[MAX_PATH_PCK], *szStrchr;
+	char	szFilename[MAX_PATH_PCK_260], *szStrchr;
 
 	LPPCKINDEXTABLE *lpIndexToExtractPtr = lpIndexToExtract;
 
@@ -116,9 +113,9 @@ BOOL CPckClass::ExtractFiles(LPPCKINDEXTABLE *lpIndexToExtract, int nFileCount)
 			return FALSE;
 		}
 
-		memcpy(szFilename, (*lpIndexToExtractPtr)->cFileIndex.szFilename, MAX_PATH_PCK);
+		memcpy(szFilename, (*lpIndexToExtractPtr)->cFileIndex.szFilename, MAX_PATH_PCK_260);
 		szStrchr = szFilename;
-		for(int j=0;j<MAX_PATH_PCK;j++)
+		for(int j=0;j<MAX_PATH_PCK_260;j++)
 		{
 			if('\\' == *szStrchr)*szStrchr = '_';
 			else if('/' == *szStrchr)*szStrchr = '_';
@@ -155,7 +152,7 @@ BOOL CPckClass::ExtractFiles(LPPCK_PATH_NODE *lpNodeToExtract, int nFileCount)
 
 	CMapViewFileRead	*lpFileRead = new CMapViewFileRead();
 
-	if(!OpenPckAndMappingRead(lpFileRead, m_PckAllInfo.szFilename)){
+	if(!OpenPckAndMappingRead(lpFileRead, m_PckAllInfo.szFilename, m_szMapNameRead)){
 		delete lpFileRead;
 		return FALSE;
 	}
@@ -255,10 +252,8 @@ BOOL CPckClass::DecompressFile(char	*lpszFilename, LPPCKINDEXTABLE lpPckFileInde
 {
 	LPPCKFILEINDEX lpPckFileIndex = &lpPckFileIndexTable->cFileIndex;
 
-	//CMapViewFileRead	*lpFileRead = (CMapViewFileRead*)lpvoidFileRead;
-	CMapViewFileWrite	*lpFileWrite = new CMapViewFileWrite();
+	CMapViewFileWrite	*lpFileWrite = new CMapViewFileWrite(0xffffffff);
 
-	//LPBYTE	lpMapAddress;
 	LPBYTE	lpMapAddressToWrite;
 	DWORD	dwFileLengthToWrite;
 
@@ -272,20 +267,15 @@ BOOL CPckClass::DecompressFile(char	*lpszFilename, LPPCKINDEXTABLE lpPckFileInde
 	if(!lpFileWrite->Open(lpszFilename, CREATE_ALWAYS))
 	{
 		PrintLogE(TEXT_OPENWRITENAME_FAIL, lpszFilename, __FILE__, __FUNCTION__, __LINE__);
-
 		delete lpFileWrite;
 		return FALSE;
 	}
 
 	if(!lpFileWrite->Mapping(m_szMapNameWrite, dwFileLengthToWrite))
 	{
-
 		delete lpFileWrite;
-
 		if(0 == dwFileLengthToWrite)return TRUE;
-
 		PrintLogE(TEXT_CREATEMAP_FAIL, __FILE__, __FUNCTION__, __LINE__);
-
 		return FALSE;
 	}
 

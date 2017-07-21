@@ -12,86 +12,58 @@
 #include "PckClass.h"
 #include "PckControlCenter.h"
 
-void CPckClass::PrintLogI(char *_text)
-{
-	lpPckParams->lpPckControlCenter->PrintLogI(_text);
+#define define_one_PrintLog(_loglevel)	\
+void CPckClass::PrintLog##_loglevel(const char *_text)\
+{\
+	lpPckParams->lpPckControlCenter->PrintLog##_loglevel(_text);\
+}\
+void CPckClass::PrintLog##_loglevel(const wchar_t *_text)\
+{\
+	lpPckParams->lpPckControlCenter->PrintLog##_loglevel(_text);\
 }
 
-void CPckClass::PrintLogW(char *_text)
-{
-	lpPckParams->lpPckControlCenter->PrintLogW(_text);
-}
+define_one_PrintLog(I);
+define_one_PrintLog(W);
+define_one_PrintLog(E);
+define_one_PrintLog(D);
+define_one_PrintLog(N);
 
-void CPckClass::PrintLogE(char *_text)
-{
-	lpPckParams->lpPckControlCenter->PrintLogE(_text);
-}
-
-
-void CPckClass::PrintLogD(char *_text)
-{
-	lpPckParams->lpPckControlCenter->PrintLogD(_text);
-}
-
-
-void CPckClass::PrintLogI(wchar_t *_text)
-{
-	lpPckParams->lpPckControlCenter->PrintLogI(_text);
-}
-
-void CPckClass::PrintLogW(wchar_t *_text)
-{
-	lpPckParams->lpPckControlCenter->PrintLogW(_text);
-}
-
-
-void CPckClass::PrintLogD(wchar_t *_text)
-{
-	lpPckParams->lpPckControlCenter->PrintLogD(_text);
-}
-
-
-void CPckClass::PrintLogE(wchar_t *_text)
-{
-	lpPckParams->lpPckControlCenter->PrintLogE(_text);
-}
-
-void CPckClass::PrintLogE(char *_maintext, char *_file, char *_func, long _line)
+void CPckClass::PrintLogE(const char *_maintext, const char *_file, const char *_func, const long _line)
 {
 	lpPckParams->lpPckControlCenter->PrintLogE(_maintext, _file, _func, _line);
 }
 
-void CPckClass::PrintLogE(wchar_t *_maintext, char *_file, char *_func, long _line)
+void CPckClass::PrintLogE(const wchar_t *_maintext, const char *_file, const char *_func, const long _line)
 {
 	lpPckParams->lpPckControlCenter->PrintLogE(_maintext, _file, _func, _line);
 }
 
-void CPckClass::PrintLogE(char *_fmt, char *_maintext, char *_file, char *_func, long _line)
+void CPckClass::PrintLogE(const char *_fmt, const char *_maintext, const char *_file, const char *_func, const long _line)
 {
 	lpPckParams->lpPckControlCenter->PrintLogE(_fmt, _maintext, _file, _func, _line);
 }
 
-void CPckClass::PrintLogE(char *_fmt, wchar_t *_maintext, char *_file, char *_func, long _line)
+void CPckClass::PrintLogE(const char *_fmt, const wchar_t *_maintext, const char *_file, const char *_func, const long _line)
 {
 	lpPckParams->lpPckControlCenter->PrintLogE(_fmt, _maintext, _file, _func, _line);
 }
 
-void CPckClass::PrintLog(char chLevel, char *_maintext)
+void CPckClass::PrintLog(const char chLevel, const char *_maintext)
 {
 	lpPckParams->lpPckControlCenter->PrintLog(chLevel, _maintext);
 }
 
-void CPckClass::PrintLog(char chLevel, wchar_t *_maintext)
+void CPckClass::PrintLog(const char chLevel, const wchar_t *_maintext)
 {
 	lpPckParams->lpPckControlCenter->PrintLog(chLevel, _maintext);
 }
 
-void CPckClass::PrintLog(char chLevel, char *_fmt, char *_maintext)
+void CPckClass::PrintLog(const char chLevel, const char *_fmt, const char *_maintext)
 {
 	lpPckParams->lpPckControlCenter->PrintLog(chLevel, _fmt, _maintext);
 }
 
-void CPckClass::PrintLog(char chLevel, char *_fmt, wchar_t *_maintext)
+void CPckClass::PrintLog(const char chLevel, const char *_fmt, const wchar_t *_maintext)
 {
 	lpPckParams->lpPckControlCenter->PrintLog(chLevel, _fmt, _maintext);
 }

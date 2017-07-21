@@ -135,7 +135,7 @@ BOOL CZupClass::BuildZupBaseDict()
 {
 	LPPCKINDEXTABLE	lpPckIndexTable = m_lpPckIndexTable;
 
-	for(unsigned long i = 0;i<m_PckAllInfo.PckTail.dwFileCount;i++)
+	for(unsigned long i = 0;i<m_PckAllInfo.dwFileCount;i++)
 	{
 		//以element\开头的都需要解码
 		//其他直接复制

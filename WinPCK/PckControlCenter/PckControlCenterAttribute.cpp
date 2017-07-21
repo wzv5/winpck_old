@@ -1,4 +1,3 @@
-
 //////////////////////////////////////////////////////////////////////
 // PckControlCenterAttribute.cpp: 用于解析完美世界公司的pck文件中的数据，并显示在List中
 // 头文件,界面与PCK类的数据交互，控制中心
@@ -14,47 +13,23 @@
 #include "PckControlCenter.h"
 #include "PckClass.h"
 
-
-
 CONST	LPPCKINDEXTABLE		CPckControlCenter::GetPckIndexTable()
 {
-
 	return m_lpClassPck->GetPckIndexTable();
 }
 
-//CONST	LPPCK_PATH_NODE		CPckControlCenter::GetPckPathNode()
-//{
-//	return m_lpClassPck->GetPckPathNode();
-//}
-
-CONST	LPPCKHEAD			CPckControlCenter::GetPckHead()
-{
-
-	return m_lpClassPck->GetPckHead();
-}
-
-//LPCTSTR	CPckControlCenter::GetLastErrorString()
-//{
-//
-//	return m_lpClassPck->m_lastErrorString;
-//}
-
 DWORD	CPckControlCenter::GetPckFileCount()
 {
-
 	return m_lpClassPck->GetPckFileCount();
 }
 
-PCKADDR	CPckControlCenter::GetPckSize()
+QWORD	CPckControlCenter::GetPckSize()
 {
-
-	return m_lpClassPck->GetPckHead()->dwPckSize;
+	return m_lpClassPck->GetPckSize();
 }
-
 
 BOOL	CPckControlCenter::IsValidPck()
 {
-
 	return (NULL != m_lpClassPck);
 }
 
@@ -63,40 +38,35 @@ BOOL	CPckControlCenter::GetCurrentNodeString(char* szCurrentNodePathString, LPPC
 	return m_lpClassPck->GetCurrentNodeString(szCurrentNodePathString, lpNode);
 }
 
-PCKADDR	CPckControlCenter::GetPckRedundancyDataSize()
+QWORD	CPckControlCenter::GetPckRedundancyDataSize()
 {
-
 	return m_lpClassPck->GetPckRedundancyDataSize();
 }
 
-PCKADDR	CPckControlCenter::GetPckDataAreaSize()
+QWORD	CPckControlCenter::GetPckDataAreaSize()
 {
-
 	return m_lpClassPck->GetPckDataAreaSize();
 }
 
 
 BOOL	CPckControlCenter::GetSingleFileData(LPVOID lpvoidFileRead, LPPCKINDEXTABLE lpPckFileIndexTable, char *buffer, size_t sizeOfBuffer)
 {
-
 	return m_lpClassPck->GetSingleFileData(lpvoidFileRead, lpPckFileIndexTable, buffer, sizeOfBuffer);
 }
 
 char*	CPckControlCenter::GetAdditionalInfo()
 {
-
 	return m_lpClassPck->GetAdditionalInfo();
 }
 
 BOOL	CPckControlCenter::SetAdditionalInfo()
 {
-
 	return m_lpClassPck->SetAdditionalInfo();
 }
 
-LPCSTR	CPckControlCenter::GetCurrentVersionName()
+LPCTSTR	CPckControlCenter::GetCurrentVersionName()
 {
-	return cParams.lpPckVersion->getCurrentKey()->name;
+	return m_lpClassPck->GetPckVersion()->name;
 }
 
 

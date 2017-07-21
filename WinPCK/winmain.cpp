@@ -198,33 +198,16 @@ BOOL TInstDlg::EvClose()
 	return FALSE;
 }
 
+
 BOOL TInstDlg::EvTimer(WPARAM timerID, TIMERPROC proc)
 {
-	TCHAR		szString[MAX_PATH];
-	INT			iNewPos;
 	switch(timerID)
 	{
 	case WM_TIMER_PROGRESS_100:
-
-		//if(0 == lpPckParams->cVarParams.dwUIProgressUpper)lpPckParams->cVarParams.dwUIProgressUpper = 1;
-		iNewPos = (INT)((lpPckParams->cVarParams.dwUIProgress<<10 ) /
-			lpPckParams->cVarParams.dwUIProgressUpper);
-		
-		SendDlgItemMessage(IDC_PROGRESS, PBM_SETPOS,(WPARAM)iNewPos, (LPARAM)0 );
-
-		if(lpPckParams->cVarParams.dwUIProgress == lpPckParams->cVarParams.dwUIProgressUpper)
-			StringCchPrintf(szString, MAX_PATH, szTimerProcessedFormatString, lpPckParams->cVarParams.dwUIProgress, lpPckParams->cVarParams.dwUIProgressUpper);
-		else
-			StringCchPrintf(szString, MAX_PATH, szTimerProcessingFormatString, lpPckParams->cVarParams.dwUIProgress, lpPckParams->cVarParams.dwUIProgressUpper, lpPckParams->cVarParams.dwUIProgress * 100.0 / lpPckParams->cVarParams.dwUIProgressUpper, (lpPckParams->cVarParams.dwMTMemoryUsed>>10) * 100.0 / (lpPckParams->dwMTMaxMemory>>10));
-
-		SetStatusBarText(3, szString);
-
+		RefreshProgress();
 		break;
-
 	}
-
 	return	FALSE;
-
 }
 /*
 	儊僀儞僟僀傾儘僌梡 WM_COMMAND 張棟儖乕僠儞
@@ -379,8 +362,12 @@ BOOL TInstDlg::EvCommand(WORD wNotifyCode, WORD wID, LPARAM hwndCtl)
 	case ID_MENU_COMPRESS_OPT:
 		{
 			TCompressOptDlg	dlg(lpPckParams, this);
-			//TCompressOptDlg	dlg(&m_CompressLevel, &m_CompressThread, &m_CompressThreadMax, &mt_MaxMemory, this);
+			DWORD dwCompressLevel = lpPckParams->dwCompressLevel;
 			dlg.Exec();
+			if(dwCompressLevel != lpPckParams->dwCompressLevel)
+				if(lpPckParams->lpPckControlCenter->IsValidPck())
+					lpPckParams->lpPckControlCenter->ResetCompressor();
+
 		}
 		break;
 
@@ -713,10 +700,12 @@ BOOL TInstDlg::EvNotify(UINT ctlID, NMHDR *pNmHdr)
 
 				//isSearchMode = 2 == item.iImage ? TRUE : FALSE;
 
+				//列表是否是以搜索状态显示
 				if(m_lpPckCenter->GetListInSearchMode())
 				{
-					memset(&m_PathDirs, 0, sizeof(m_PathDirs));
-					*m_PathDirs.lpszDirNames = m_PathDirs.szPaths;
+					//memset(&m_PathDirs, 0, sizeof(m_PathDirs));
+					//*m_PathDirs.lpszDirNames = m_PathDirs.szPaths;
+					//m_PathDirs.nDirCount = 0;
 
 					if(0 != iCurrentHotItem)
 					{
@@ -729,11 +718,13 @@ BOOL TInstDlg::EvNotify(UINT ctlID, NMHDR *pNmHdr)
 
 				if(NULL == lpNodeToShow)return FALSE;
 				
+				//本级是否是文件夹(NULL=文件夹)
 				if(NULL == lpNodeToShow->lpPckIndexTable)
 				{
+					//是否是上级目录(".."目录)
 					if(NULL == lpNodeToShow->parentfirst)
 					{
-						//下一级
+						//进入目录中(下一级)
 						if(NULL != lpNodeToShow->child)
 						{
 							char **lpCurrentDir = m_PathDirs.lpszDirNames + m_PathDirs.nDirCount;
@@ -782,17 +773,17 @@ BOOL TInstDlg::EvNotify(UINT ctlID, NMHDR *pNmHdr)
 			if(m_lpPckCenter->GetListInSearchMode())
 			{
 				lpIndexToShow = (LPPCKINDEXTABLE)((NMLVDISPINFO*) pNmHdr)->item.lParam;
-				StringCchLengthA(lpIndexToShow->cFileIndex.szFilename, MAX_PATH_PCK, &nLen);
-				nAllowMaxLength = MAX_PATH_PCK - 2;
+				StringCchLengthA(lpIndexToShow->cFileIndex.szFilename, MAX_PATH_PCK_260, &nLen);
+				nAllowMaxLength = MAX_PATH_PCK_260 - 2;
 			}else{
 
 				lpNodeToShow = (LPPCK_PATH_NODE)((NMLVDISPINFO*) pNmHdr)->item.lParam;
 				if(NULL == lpNodeToShow->child)
 				{
-					StringCchLengthA(lpNodeToShow->lpPckIndexTable->cFileIndex.szFilename, MAX_PATH_PCK, &nLen);
-					nAllowMaxLength = MAX_PATH_PCK - nLen + strlen(lpNodeToShow->szName) - 2;
+					StringCchLengthA(lpNodeToShow->lpPckIndexTable->cFileIndex.szFilename, MAX_PATH_PCK_260, &nLen);
+					nAllowMaxLength = MAX_PATH_PCK_260 - nLen + strlen(lpNodeToShow->szName) - 2;
 				}else{
-					nAllowMaxLength = MAX_PATH_PCK - 2;
+					nAllowMaxLength = MAX_PATH_PCK_260 - 2;
 				}
 			}
 
@@ -808,8 +799,8 @@ BOOL TInstDlg::EvNotify(UINT ctlID, NMHDR *pNmHdr)
 
 			::SetWindowLong(pNmHdr->hwndFrom, GWL_STYLE, ::GetWindowLong(pNmHdr->hwndFrom, GWL_STYLE) & (LVS_EDITLABELS ^ 0xffffffff));
 
-			char	szEditedText[MAX_PATH_PCK];
-			memset(szEditedText, 0, MAX_PATH_PCK);
+			char	szEditedText[MAX_PATH_PCK_260];
+			memset(szEditedText, 0, MAX_PATH_PCK_260);
 
 			if(NULL != ((NMLVDISPINFO*) pNmHdr)->item.pszText)
 			{
@@ -817,7 +808,7 @@ BOOL TInstDlg::EvNotify(UINT ctlID, NMHDR *pNmHdr)
 
 				//isSearchMode = 2 == ((NMLVDISPINFO*) pNmHdr)->item.iImage ? TRUE : FALSE;
 
-				WideCharToMultiByte(CP_ACP, 0, ((NMLVDISPINFO*) pNmHdr)->item.pszText, -1, szEditedText, MAX_PATH_PCK, "_", 0);
+				WideCharToMultiByte(CP_ACP, 0, ((NMLVDISPINFO*) pNmHdr)->item.pszText, -1, szEditedText, MAX_PATH_PCK_260, "_", 0);
 
 				if(m_lpPckCenter->GetListInSearchMode())
 				{
@@ -1288,7 +1279,11 @@ BOOL TInstDlg::EventUser(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_FRESH_MAIN_CAPTION:
 
 		if(wParam){
-			StringCchPrintfA(szPrintf, 256, "%s - %s", THIS_MAIN_CAPTION, m_lpPckCenter->GetCurrentVersionName());
+#ifdef UNICODE
+			sprintf_s(szPrintf, "%s - %s", THIS_MAIN_CAPTION, WtoA(m_lpPckCenter->GetCurrentVersionName()));
+#else
+			sprintf_s(szPrintf, "%s - %s", THIS_MAIN_CAPTION, m_lpPckCenter->GetCurrentVersionName());
+#endif
 			SetWindowTextA(szPrintf);
 		}else{
 			SetWindowTextA(THIS_MAIN_CAPTION);

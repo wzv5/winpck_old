@@ -10,11 +10,10 @@
 // 2012.4.10
 //////////////////////////////////////////////////////////////////////
 
-//#include "zlib.h"
-
 #include "PckClass.h"
 
 #pragma warning ( disable : 4996 )
+#pragma warning ( disable : 4146 )
 
 void CPckClass::CPckClassInit()
 {
@@ -23,11 +22,11 @@ void CPckClass::CPckClassInit()
 	m_lpPckIndexTable = NULL;
 	m_firstFile = NULL;
 
-	m_PckAllInfo.PckTail.dwFileCount = 0;
+	m_PckAllInfo.dwFileCount = 0;
 
 	memset(&m_RootNode, 0, sizeof(PCK_PATH_NODE));
 
-	*m_PckAllInfo.PckIndexAddr.szAdditionalInfo = 0;
+	*m_PckAllInfo.szAdditionalInfo = 0;
 	*m_PckAllInfo.szFilename = 0;
 
 	DWORD	dwCurrentPID = GetCurrentProcessId();
@@ -39,7 +38,10 @@ void CPckClass::CPckClassInit()
 	sprintf_s(m_szMapNameRead, 16, TEXT_MAP_NAME_READ, dwCurrentPID);
 	sprintf_s(m_szMapNameWrite, 16, TEXT_MAP_NAME_WRITE, dwCurrentPID);
 
-	m_lpThisPckKey = lpPckParams->lpPckVersion->getInitialKey();
+	BuildSaveDlgFilterString();
+
+	init_compressor();
+
 }
 
 CPckClass::CPckClass(LPPCK_RUNTIME_PARAMS inout)
@@ -69,12 +71,6 @@ BOOL CPckClass::Init(LPCTSTR	szFile)
 	}else{
 		return m_ReadCompleted = FALSE;
 	}
-	//return m_ReadCompleted = MountPckFile(m_Filename, isZupMode);
-}
-
-void CPckClass::SetPckVersion(int verID)
-{
-	m_lpThisPckKey = lpPckParams->lpPckVersion->GetKey(verID);
 }
 
 CONST	LPPCKINDEXTABLE CPckClass::GetPckIndexTable()
@@ -87,40 +83,40 @@ CONST	LPPCK_PATH_NODE CPckClass::GetPckPathNode()
 	return &m_RootNode;
 }
 
-CONST	LPPCKHEAD CPckClass::GetPckHead()
+QWORD CPckClass::GetPckSize()
 {
-	return &m_PckAllInfo.PckHead;
+	return m_PckAllInfo.qwPckSize;
 }
 
 DWORD CPckClass::GetPckFileCount()
 {
-	return m_PckAllInfo.PckTail.dwFileCount;
+	return m_PckAllInfo.dwFileCount;
 }
 
-PCKADDR CPckClass::GetPckDataAreaSize()
+QWORD CPckClass::GetPckDataAreaSize()
 {
 	return m_PckAllInfo.dwAddressName - PCK_DATA_START_AT;
 }
 
-PCKADDR CPckClass::GetPckRedundancyDataSize()
+QWORD CPckClass::GetPckRedundancyDataSize()
 {
 	return m_PckAllInfo.dwAddressName - PCK_DATA_START_AT - m_RootNode.child->qdwDirCipherTextSize;
 }
 
 char * CPckClass::GetAdditionalInfo()
 {
-	return m_PckAllInfo.PckIndexAddr.szAdditionalInfo;
+	return m_PckAllInfo.szAdditionalInfo;
 }
 
 BOOL CPckClass::SetAdditionalInfo()
 {
 	if(0 == *m_PckAllInfo.szFilename)return FALSE;
 
-	CMapViewFileWrite	*lpcWritefile = new CMapViewFileWrite();
+	CMapViewFileWrite	*lpcWritefile = new CMapViewFileWrite(m_PckAllInfo.lpSaveAsPckVerFunc->cPckXorKeys->dwMaxSinglePckSize);
 
-	if(NULL == strstr(m_PckAllInfo.PckIndexAddr.szAdditionalInfo, PCK_ADDITIONAL_INFO + 4))
+	if(NULL == strstr(m_PckAllInfo.szAdditionalInfo, PCK_ADDITIONAL_INFO))
 	{
-		strcpy(m_PckAllInfo.PckIndexAddr.szAdditionalInfo,	PCK_ADDITIONAL_INFO
+		strcpy(m_PckAllInfo.szAdditionalInfo,	PCK_ADDITIONAL_INFO
 															PCK_ADDITIONAL_INFO_STSM);
 	}
 
@@ -131,9 +127,10 @@ BOOL CPckClass::SetAdditionalInfo()
 		return FALSE;
 	}
 
-	lpcWritefile->SetFilePointer(-PCK_TAIL_OFFSET, FILE_END);
-	
-	if(!lpcWritefile->Write(&m_PckAllInfo.PckIndexAddr, sizeof(PCKINDEXADDR)))
+	lpcWritefile->SetFilePointer(-((QWORD)(m_PckAllInfo.lpSaveAsPckVerFunc->dwTailSize)), FILE_END);
+
+	if(!lpcWritefile->Write(m_PckAllInfo.lpSaveAsPckVerFunc->FillTailData(&m_PckAllInfo), \
+								m_PckAllInfo.lpSaveAsPckVerFunc->dwTailSize))
 	{
 		PrintLogE(TEXT_WRITEFILE_FAIL, __FILE__, __FUNCTION__, __LINE__);
 

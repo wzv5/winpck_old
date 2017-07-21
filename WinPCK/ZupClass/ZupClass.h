@@ -38,11 +38,11 @@ public:
 	//BOOL	SetAdditionalInfo();
 
 	//新建pck文件
-	//BOOL	CreatePckFile(LPTSTR szPckFile, LPTSTR szPath, int level, DWORD &dwCount, DWORD &dwAllCount, BOOL	&bThreadRunning);
-	virtual BOOL	CreatePckFileMT(LPTSTR szPckFile, LPTSTR szPath/*, int level, int threadnum, int &nMaxMemory, DWORD &dwCount, DWORD &dwAllCount, BOOL	&bThreadRunning*/);
+	virtual BOOL	CreatePckFile(LPTSTR szPckFile, LPTSTR szPath/*, int level, int threadnum, int &nMaxMemory, DWORD &dwCount, DWORD &dwAllCount, BOOL	&bThreadRunning*/);
 
 	//重建pck文件
-	virtual BOOL	RebuildPckFile(LPTSTR szRebuildPckFile/*,  DWORD &dwCount, BOOL &bThreadRunning*/);
+	virtual BOOL	RebuildPckFile(LPTSTR szRebuildPckFile);
+	virtual BOOL	RecompressPckFile(LPTSTR szRecompressPckFile);
 
 	//更新pck文件//有bug
 	virtual BOOL	UpdatePckFile(LPTSTR szPckFile, TCHAR (*lpszFilePath)[MAX_PATH], int nFileCount, LPPCK_PATH_NODE lpNodeToInsert);

@@ -8,10 +8,11 @@ static char *tregist_id =
 	Copyright				: H.Shirouzu
 	Reference				: 
 	======================================================================== */
-
 #include <stdio.h>
 #include "tlib.h"
 #include "tregist.h"
+
+#ifdef _USE_T_REG_
 
 TRegistry::TRegistry(LPCTSTR company, LPTSTR appName)
 {
@@ -198,6 +199,7 @@ BOOL TRegistry::EnumKey(DWORD cnt, LPTSTR buf, int size)
 			== ERROR_SUCCESS;
 }
 
+
 BOOL TRegistry::EnumValue(DWORD cnt, LPTSTR buf, int size, DWORD *type)
 {
 	return	::RegEnumValue(hKey[openCnt -1], cnt, buf, (DWORD *)&size, 0, type, 0, 0)
@@ -236,3 +238,5 @@ BOOL TRegistry::DeleteChildTree(LPCTSTR subKey)
 	return	ret;
 }
 
+
+#endif

@@ -13,31 +13,8 @@
 #if !defined(_PCKHEADER_H_)
 #define _PCKHEADER_H_
 
-
 #include "PckDefines.h"
 #include "PckStructs.h"
 #include "PckXchgDef.h"
-
-//****** some defines *******
-
-
-/*
-明文：clear text
-密文：ciphertext
-
-常量名称				常量值
-版本号					0x20002
-文件头_验证_头			0x4DCA23EF
-文件头_验证_尾			0x56A089B7
-文件索引表_验证_头		0xFDFDFEEE
-文件索引表地址_常量		0xA8937462
-文件索引表_验证_尾		0xF00DBEEF
-索引表异或量_头			0xA8937462
-索引表异或量_尾			0xF1A43653
-索引文件名明文长度		0x114
-*/
-
-
-///////////////////////////////
 
 #endif

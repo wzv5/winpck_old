@@ -7,6 +7,7 @@
 	Copyright				: H.Shirouzu
 	Reference				: 
 	======================================================================== */
+#include "tconf.h"
 
 #ifndef TLIB_H
 #define TLIB_H
@@ -26,14 +27,14 @@
 #endif
 #pragma warning ( disable : 4355 )
 #pragma warning ( disable : 4311 )
-#pragma warning ( disable : 4312 )
 #pragma warning ( disable : 4244 )
+#pragma warning ( disable : 4312 )
 
 #include <windows.h>
 //#include <windowsx.h>
 //#include <stdio.h>
 //#include <stdlib.h>
-
+#include <richedit.h>
 #include "commctrl.h"
 //#include <regstr.h>
 //#include <shlobj.h>
@@ -527,7 +528,6 @@ HMODULE TLoadLibraryW(LPWSTR dllname);
 #endif // !UNICODE
 
 BOOL TSetPrivilege(LPTSTR pszPrivilege, BOOL bEnable);
-//int MakeUnlimitedPath(WCHAR *buf);
 
 _int64 hex2ll(char *buf);
 int bin2hexstr(const BYTE *bindata, int len, char *buf);
@@ -560,6 +560,6 @@ void DebugU8(char *fmt,...);
 #else
 #define Debug  
 #endif
-//#include "tapi32u8.h"
+#include "tapi32u8.h"
 
 #endif

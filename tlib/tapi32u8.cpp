@@ -17,6 +17,8 @@ static char *tap32u8_id =
 #include <stdlib.h>
 #include <stddef.h>
 
+#ifdef _USE_T_U8FUNC_
+
 /*=========================================================================
 	UCS2(W) - UTF-8(U8) - ANSI(A) ‘ŠŒÝ•ÏŠ·
 =========================================================================*/
@@ -153,3 +155,4 @@ BOOL IsUTF8(const char *_s)
 	return	TRUE;
 }
 
+#endif

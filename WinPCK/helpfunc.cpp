@@ -44,7 +44,7 @@ VOID TInstDlg::ViewFileAttribute()
 
 	if(m_lpPckCenter->IsValidPck())
 	{
-		char	szPath[MAX_PATH_PCK];
+		char	szPath[MAX_PATH_PCK_260];
 
 		m_lpPckCenter->GetCurrentNodeString(szPath, m_currentNodeOnShow);
 
@@ -107,18 +107,22 @@ VOID TInstDlg::ViewFile()
 
 	if(NULL != lpszFileExt)
 	{
-		//转化lpszFileExt为小写
-		_strlwr_s(lpszFileExt, 6);
+		//转化lpszFileExt为小写,当strlen(lpszFileExt) > 6 时报错，修改
+		if(4 == strnlen_s(lpszFileExt, 6)){
+			_strlwr_s(lpszFileExt, 6);
 
-		if(NULL != strstr(FILE_EXT_PIC, lpszFileExt))
-		{
-			if(0 == strcmpi(lpszFileExt, ".dds"))
-				dlg = new TPicDlg(&buf, dwFilesizeToView, FMT_DDS, lpszFileTitle, this);
-			else if(0 == strcmpi(lpszFileExt, ".tga"))
-				dlg = new TPicDlg(&buf, dwFilesizeToView, FMT_TGA, lpszFileTitle, this);
-			else
-				dlg = new TPicDlg(&buf, dwFilesizeToView, FMT_RAW, lpszFileTitle, this);
+			if(NULL != strstr(FILE_EXT_PIC, lpszFileExt))
+			{
+				if(0 == strcmpi(lpszFileExt, ".dds"))
+					dlg = new TPicDlg(&buf, dwFilesizeToView, FMT_DDS, lpszFileTitle, this);
+				else if(0 == strcmpi(lpszFileExt, ".tga"))
+					dlg = new TPicDlg(&buf, dwFilesizeToView, FMT_TGA, lpszFileTitle, this);
+				else
+					dlg = new TPicDlg(&buf, dwFilesizeToView, FMT_RAW, lpszFileTitle, this);
 			
+			}else{
+				dlg = new TViewDlg(&buf, dwFilesizeToView, lpszFileTitle, this);
+			}
 		}else{
 			dlg = new TViewDlg(&buf, dwFilesizeToView, lpszFileTitle, this);
 		}
@@ -335,7 +339,7 @@ BOOL TInstDlg::OpenFiles(LPVOID &lpszFilePathArray, DWORD &dwFileCount)
 }
 
 
-int TInstDlg::SaveFile(TCHAR * lpszFileName, LPCTSTR lpstrFilter)
+DWORD TInstDlg::SaveFile(TCHAR * lpszFileName, LPCTSTR lpstrFilter, DWORD nFilterIndex)
 {
 	OPENFILENAME ofn;
 	//TCHAR szStrPrintf[260];
@@ -349,6 +353,7 @@ int TInstDlg::SaveFile(TCHAR * lpszFileName, LPCTSTR lpstrFilter)
 	ofn.nMaxFile          = MAX_PATH ;
 	ofn.Flags             = OFN_OVERWRITEPROMPT | OFN_EXPLORER | OFN_ENABLESIZING;
 	ofn.lpstrDefExt		  = TEXT("pck");
+	ofn.nFilterIndex	  = nFilterIndex;
 
 	if(!GetSaveFileName( & ofn ))
 	{
@@ -446,10 +451,10 @@ void TInstDlg::AddSetupReg()
 
 		RegCloseKey(hRegKey);
 
-	RecurseDeleteKey(HKEY_CLASSES_ROOT, TEXT(".pck"));
-	RecurseDeleteKey(HKEY_CLASSES_ROOT, TEXT("pckfile"));
-	RecurseDeleteKey(HKEY_CLASSES_ROOT, TEXT(".zup"));
-	RecurseDeleteKey(HKEY_CLASSES_ROOT, TEXT("ZPWUpdatePack"));
+		RecurseDeleteKey(HKEY_CLASSES_ROOT, TEXT(".pck"));
+		RecurseDeleteKey(HKEY_CLASSES_ROOT, TEXT("pckfile"));
+		RecurseDeleteKey(HKEY_CLASSES_ROOT, TEXT(".zup"));
+		RecurseDeleteKey(HKEY_CLASSES_ROOT, TEXT("ZPWUpdatePack"));
 
 	}
 
@@ -543,5 +548,26 @@ void TInstDlg::InitLogWindow()
 	m_lpPckCenter->PrintLogI(	THIS_NAME \
 								THIS_VERSION \
 								" is started.");
+
+}
+
+
+void TInstDlg::RefreshProgress()
+{
+	TCHAR		szString[MAX_PATH];
+	INT			iNewPos;
+
+	//if(0 == lpPckParams->cVarParams.dwUIProgressUpper)lpPckParams->cVarParams.dwUIProgressUpper = 1;
+	iNewPos = (INT)((lpPckParams->cVarParams.dwUIProgress << 10) /
+		lpPckParams->cVarParams.dwUIProgressUpper);
+
+	SendDlgItemMessage(IDC_PROGRESS, PBM_SETPOS, (WPARAM)iNewPos, (LPARAM)0);
+
+	if (lpPckParams->cVarParams.dwUIProgress == lpPckParams->cVarParams.dwUIProgressUpper)
+		StringCchPrintf(szString, MAX_PATH, szTimerProcessedFormatString, lpPckParams->cVarParams.dwUIProgress, lpPckParams->cVarParams.dwUIProgressUpper);
+	else
+		StringCchPrintf(szString, MAX_PATH, szTimerProcessingFormatString, lpPckParams->cVarParams.dwUIProgress, lpPckParams->cVarParams.dwUIProgressUpper, lpPckParams->cVarParams.dwUIProgress * 100.0 / lpPckParams->cVarParams.dwUIProgressUpper, (lpPckParams->cVarParams.dwMTMemoryUsed >> 10) * 100.0 / (lpPckParams->dwMTMaxMemory >> 10));
+
+	SetStatusBarText(3, szString);
 
 }

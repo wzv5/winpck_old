@@ -18,7 +18,7 @@
 #include "miscdlg.h"
 //#include "miscpicdlg.h"
 
-//#include <stdio.h>
+#include <stdio.h>
 #include <shlwapi.h>
 
 #include "PckHeader.h"
@@ -53,8 +53,11 @@ BOOL TLogDlg::EvCreate(LPARAM lParam)
 
 	hSmall = ImageList_Create(16, 16, ILC_COLOR32, 4, 1);
 
+
+
 	hiconItem = LoadIcon(TApp::GetInstance(), MAKEINTRESOURCE(IDI_ICON_LOGI)); 
-	ImageList_AddIcon(hSmall, hiconItem); 
+	ImageList_AddIcon(hSmall, hiconItem);	//LOGN
+	ImageList_AddIcon(hSmall, hiconItem);	//LOGI
 	DestroyIcon(hiconItem); 
 
 	hiconItem = LoadIcon(TApp::GetInstance(), MAKEINTRESOURCE(IDI_ICON_LOGW)); 
@@ -243,7 +246,7 @@ char*  TLogDlg::pszLogFileName()
 
 	//创建文件exportlog_2015-05-04_13_22_33.log
 	GetLocalTime (&systime);
-	StringCchPrintfA(logfile, MAX_PATH, "%sexportlog_%04d-%02d-%02d_%02d_%02d_%02d.log", szExePath, \
+	sprintf_s(logfile, "%sexportlog_%04d-%02d-%02d_%02d_%02d_%02d.log", szExePath, \
 										systime.wYear, systime.wMonth, systime.wDay, \
 										systime.wHour, systime.wMinute, systime.wSecond);
 	return logfile;
@@ -300,7 +303,7 @@ char*  TLogDlg::pszTargetListLog(int iItem)
 */
 BOOL TInfoDlg::EvCreate(LPARAM lParam)
 {
-	SendDlgItemMessage(IDC_EDIT_INFO, EM_LIMITTEXT , 255, 0);
+	SendDlgItemMessage(IDC_EDIT_INFO, EM_LIMITTEXT , PCK_ADDITIONAL_INFO_SIZE - 1, 0);
 	SetDlgItemTextA(IDC_EDIT_INFO, dirBuf);
 	return	TRUE;
 }
@@ -310,8 +313,8 @@ BOOL TInfoDlg::EvCommand(WORD wNotifyCode, WORD wID, LPARAM hwndCtl)
 	switch (wID)
 	{
 	case IDOK:
-		memset(dirBuf, 0, 256);
-		GetDlgItemTextA(IDC_EDIT_INFO, dirBuf, 256);
+		memset(dirBuf, 0, PCK_ADDITIONAL_INFO_SIZE);
+		GetDlgItemTextA(IDC_EDIT_INFO, dirBuf, PCK_ADDITIONAL_INFO_SIZE);
 		EndDialog(wID);
 		return	TRUE;
 
@@ -359,7 +362,7 @@ BOOL TCompressOptDlg::EvCreate(LPARAM lParam)
 
 	SendDlgItemMessage(IDC_EDIT_MEM, EM_LIMITTEXT, 4, 0);
 
-	SendDlgItemMessage(IDC_SLIDER_LEVEL, TBM_SETRANGE , FALSE, MAKELONG(1, 9));
+	SendDlgItemMessage(IDC_SLIDER_LEVEL, TBM_SETRANGE , FALSE, MAKELONG(1, 12));
 	SendDlgItemMessage(IDC_SLIDER_THREAD, TBM_SETRANGE , FALSE, MAKELONG(1, lpParams->dwMTMaxThread));
 	SendDlgItemMessage(IDC_SLIDER_LEVEL, TBM_SETPOS, TRUE, (LPARAM)lpParams->dwCompressLevel);
 	SendDlgItemMessage(IDC_SLIDER_THREAD, TBM_SETPOS, TRUE, (LPARAM)lpParams->dwMTThread);
@@ -862,9 +865,9 @@ BOOL TAttrDlg::EvCreate(LPARAM lParam)
 	if(isSearchMode)
 	{
 		LPPCKINDEXTABLE	lpPckIndex = (LPPCKINDEXTABLE)lpPckInfo;
-		char	szFilename[MAX_PATH_PCK];
+		char	szFilename[MAX_PATH_PCK_260];
 
-		memcpy(szFilename, lpPckIndex->cFileIndex.szFilename, MAX_PATH_PCK);
+		memcpy(szFilename, lpPckIndex->cFileIndex.szFilename, MAX_PATH_PCK_260);
 
 		SetDlgItemTextA(IDC_EDIT_ATTR_TYPE, "文件");
 		

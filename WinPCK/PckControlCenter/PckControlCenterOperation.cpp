@@ -97,7 +97,14 @@ BOOL CPckControlCenter::Open(LPCTSTR lpszFile)
 
 void CPckControlCenter::SetPckVersion(int verID)
 {
-	m_lpClassPck->SetPckVersion(verID);
+	//GetSaveFileName返回的nFilterIndex是以1为基数的，此时应该-1
+	m_lpClassPck->SetPckVersion(verID - 1);
+}
+
+int	CPckControlCenter::GetPckVersion()
+{
+	//GetSaveFileName返回的nFilterIndex是以1为基数的，此时应该+1
+	return (m_lpClassPck->GetPckVersion()->id + 1);
 }
 
 void CPckControlCenter::Close()
@@ -122,7 +129,7 @@ void CPckControlCenter::Close()
 void CPckControlCenter::CreateRestoreData()
 {
 
-	if(m_lpClassPck->GetPckBasicInfo(m_lpszFile4Restore, &m_PckHead, m_lpPckFileIndexData, m_dwPckFileIndexDataSize))
+	if(m_lpClassPck->GetPckBasicInfo(m_lpszFile4Restore, &m_PckHeadForRestore, m_lpPckFileIndexData, m_dwPckFileIndexDataSize))
 	{
 		hasRestoreData = TRUE;
 	}else{
@@ -137,7 +144,7 @@ void CPckControlCenter::RestoreData(LPCTSTR lpszFile)
 	{
 		if(0 == lstrcmpi(m_lpszFile4Restore, lpszFile)){
 
-			if(!m_lpClassPck->SetPckBasicInfo(&m_PckHead, m_lpPckFileIndexData, m_dwPckFileIndexDataSize))
+			if(!m_lpClassPck->SetPckBasicInfo(&m_PckHeadForRestore, m_lpPckFileIndexData, m_dwPckFileIndexDataSize))
 				PrintLogE(TEXT_ERROR_RESTORING);
 			else
 				PrintLogI(TEXT_LOG_RESTOR_OK);
@@ -193,10 +200,16 @@ BOOL	CPckControlCenter::RebuildPckFile(LPTSTR szRebuildPckFile)
 	return m_lpClassPck->RebuildPckFile(szRebuildPckFile);
 }
 
-//新建pck文件--
-BOOL	CPckControlCenter::CreatePckFileMT(LPTSTR szPckFile, LPTSTR szPath)
+//重建pck文件并重压缩数据
+BOOL	CPckControlCenter::RecompressPckFile(LPTSTR szRecompressPckFile)
 {
-	return m_lpClassPck->CreatePckFileMT(szPckFile, szPath);
+	return m_lpClassPck->RecompressPckFile(szRecompressPckFile);
+}
+
+//新建pck文件--
+BOOL	CPckControlCenter::CreatePckFile(LPTSTR szPckFile, LPTSTR szPath)
+{
+	return m_lpClassPck->CreatePckFile(szPckFile, szPath);
 }
 
 //解压文件
@@ -217,5 +230,11 @@ VOID	CPckControlCenter::DeleteNode(LPPCK_PATH_NODE lpNode)
 	CreateRestoreData();
 
 	return m_lpClassPck->DeleteNode(lpNode);
+}
+
+//重置PCK的压缩参数
+void	CPckControlCenter::ResetCompressor()
+{
+	m_lpClassPck->init_compressor();
 }
 

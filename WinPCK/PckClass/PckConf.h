@@ -10,24 +10,11 @@
 //////////////////////////////////////////////////////////////////////
 
 #include <windows.h>
-#include <strsafe.h>
+#include <stdio.h>
+#include <tchar.h>
 
 #pragma warning ( disable : 4005 )
 #pragma warning ( disable : 4995 )
 
-//#pragma once
-
-#if !defined(_PCKCONFIG_H_)
-#define _PCKCONFIG_H_
-
-#define _WIN32_WINNT 0x0501
-
-//#pragma pack(4)
-
-//#define PCKV202	//诛仙、完美世界等
-//#define PCKV203	//笑傲江湖
-
-
-
-
-#endif
+//使用压缩程序单线程版本
+#define PCK_COMPRESS_NEED_ST	0

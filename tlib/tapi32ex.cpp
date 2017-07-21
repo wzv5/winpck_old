@@ -10,12 +10,9 @@ static char *tap32ex_id =
 	======================================================================== */
 
 #include "tlib.h"
-
 #include <stdio.h>
-//#include <mbstring.h>
-//#include <stdlib.h>
-//#include <stddef.h>
-//#include <assert.h>
+
+#ifdef _USE_T_CRYPT_
 
 BOOL (WINAPI *pCryptAcquireContext)(HCRYPTPROV *, LPCTSTR, LPCTSTR, DWORD, DWORD);//////
 BOOL (WINAPI *pCryptReleaseContext)(HCRYPTPROV, DWORD);
@@ -475,4 +472,4 @@ u_int MakeHash(const void *data, int size, DWORD iv)
 	}
 	return	val;
 }
-
+#endif

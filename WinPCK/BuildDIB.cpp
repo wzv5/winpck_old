@@ -176,28 +176,7 @@ void TPicDlg::decode_dds_dxt3(BYTE *ddsimage)
 			xmm1 = _mm_set_epi32(0xf0f0f0f0, 0xf0f0f0f0, 0xf0f0f0f0, 0xf0f0f0f0);
 			xmm3 = _mm_and_si128(xmm2, xmm1);
 
-			//xmmAlphas[0] = _mm_slli_si128(
-			//					_mm_unpacklo_epi16(
-			//						_mm_unpacklo_epi8( 
-			//							_mm_shuffle_epi32(xmm3, _MM_SHUFFLE(0, 0, 0, 0)), xmm0), xmm0), 3);
-
-			//xmmAlphas[1] = _mm_slli_si128(
-			//					_mm_unpacklo_epi16(
-			//						_mm_unpacklo_epi8( 
-			//							_mm_shuffle_epi32(xmm3, _MM_SHUFFLE(1, 1, 1, 1)), xmm0), xmm0), 3);
-
-			//xmmAlphas[2] = _mm_slli_si128(
-			//					_mm_unpacklo_epi16(
-			//						_mm_unpacklo_epi8( 
-			//							_mm_shuffle_epi32(xmm3, _MM_SHUFFLE(2, 2, 2, 2)), xmm0), xmm0), 3);
-
-			//xmmAlphas[3] = _mm_slli_si128(
-			//					_mm_unpacklo_epi16(
-			//						_mm_unpacklo_epi8( 
-			//							_mm_shuffle_epi32(xmm3, _MM_SHUFFLE(3, 3, 3, 3)), xmm0), xmm0), 3);
-
 			lpwDdsBuffer += 4;
-
 
 			CalcRgbsDXT35(dwColorIndexInBlock, lpwDdsBuffer);
 			lpwDdsBuffer +=2;

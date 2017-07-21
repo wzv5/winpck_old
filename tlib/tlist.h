@@ -2,6 +2,14 @@
 #ifndef TLIST_H
 #define TLIST_H
 
+#ifdef _USE_T_INI_
+#ifndef _USE_T_LIST_
+#define _USE_T_LIST_
+#endif
+#endif
+
+#ifdef _USE_T_LIST_
+
 struct TListObj {
 	TListObj *prior, *next;
 };
@@ -36,5 +44,5 @@ public:
 	void PutObj(int list_type, TListObj *obj);
 };
 
-
+#endif
 #endif

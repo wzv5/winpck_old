@@ -10,11 +10,7 @@ static char *tmisc_id =
 	======================================================================== */
 
 #include "tlib.h"
-//
 #include <stdio.h>
-////#include <mbstring.h>
-//#include <stdlib.h>
-//#include <stddef.h>
 
 DWORD TWinVersion = ::GetVersion();
 
@@ -199,6 +195,7 @@ HMODULE TLoadLibraryW(LPWSTR dllname)
 	return	hModule;
 }
 
+
 BOOL TSetPrivilege(LPTSTR pszPrivilege, BOOL bEnable)
 {
     HANDLE           hToken;
@@ -225,7 +222,6 @@ BOOL TSetPrivilege(LPTSTR pszPrivilege, BOOL bEnable)
 
     return TRUE;
 }
-
 
 
 /*=========================================================================
@@ -371,69 +367,13 @@ static char *ExceptionLogInfo;
 
 LONG WINAPI Local_UnhandledExceptionFilter(struct _EXCEPTION_POINTERS *info)
 {
-	static char			buf[MAX_STACKDUMP_SIZE], szErrMsg[128];
+	static char			buf[MAX_STACKDUMP_SIZE];
 
 	static HANDLE		hFile;
 	static SYSTEMTIME	tm;
 	static CONTEXT		*context;
 	static DWORD		len, i, j;
 	static char			*stack, *esp;
-
-	DWORD	code = info->ExceptionRecord->ExceptionCode;
-	DWORD	dwAddress = (DWORD)info->ExceptionRecord->ExceptionAddress;
-
-    switch(code)
-    {
-    case EXCEPTION_ACCESS_VIOLATION :
-        sprintf(szErrMsg, "存储保护异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_DATATYPE_MISALIGNMENT :
-        sprintf(szErrMsg, "数据类型未对齐异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_BREAKPOINT :
-        sprintf(szErrMsg, "中断异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_SINGLE_STEP :
-        sprintf(szErrMsg, "单步中断异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_ARRAY_BOUNDS_EXCEEDED :
-        sprintf(szErrMsg, "数组越界异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_FLT_DENORMAL_OPERAND :
-    case EXCEPTION_FLT_DIVIDE_BY_ZERO :
-    case EXCEPTION_FLT_INEXACT_RESULT :
-    case EXCEPTION_FLT_INVALID_OPERATION :
-    case EXCEPTION_FLT_OVERFLOW :
-    case EXCEPTION_FLT_STACK_CHECK :
-    case EXCEPTION_FLT_UNDERFLOW :
-        sprintf(szErrMsg, "浮点数计算异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_INT_DIVIDE_BY_ZERO :
-        sprintf(szErrMsg, "被0除异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_INT_OVERFLOW :
-        sprintf(szErrMsg, "数据溢出异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_IN_PAGE_ERROR :
-        sprintf(szErrMsg, "页错误异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_ILLEGAL_INSTRUCTION :
-        sprintf(szErrMsg, "非法指令异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_STACK_OVERFLOW :
-        sprintf(szErrMsg, "堆栈溢出异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    case EXCEPTION_INVALID_HANDLE :
-        sprintf(szErrMsg, "无效句柄异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    default :
-        if(code & (1<<29))
-            sprintf(szErrMsg, "用户自定义的软件异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        else
-            sprintf(szErrMsg, "其它异常，错误代码：0x%08x 在 0x%08x\r\n", code, dwAddress);
-        break;
-    }
-
 
 	hFile = ::CreateFileA(ExceptionLogFile, GENERIC_WRITE, 0, 0, OPEN_ALWAYS, 0, 0);
 	::SetFilePointer(hFile, 0, 0, FILE_END);
@@ -443,7 +383,6 @@ LONG WINAPI Local_UnhandledExceptionFilter(struct _EXCEPTION_POINTERS *info)
 	len = sprintf(buf,
 #ifdef _WIN64
 		"------ %s -----\r\n"
-		"%s\r\n"
 		" Date        : %d/%02d/%02d %02d:%02d:%02d\r\n"
 		" Code/Addr   : %p / %p\r\n"
 		" AX/BX/CX/DX : %p / %p / %p / %p\r\n"
@@ -452,7 +391,6 @@ LONG WINAPI Local_UnhandledExceptionFilter(struct _EXCEPTION_POINTERS *info)
 		" 12/13/14/15 : %p / %p / %p / %p\r\n"
 		"------- 堆栈信息 -----\r\n"
 		, ExceptionTitle
-		, szErrMsg
 		, tm.wYear, tm.wMonth, tm.wDay, tm.wHour, tm.wMinute, tm.wSecond
 		, info->ExceptionRecord->ExceptionCode, info->ExceptionRecord->ExceptionAddress
 		, context->Rax, context->Rbx, context->Rcx, context->Rdx
@@ -461,14 +399,12 @@ LONG WINAPI Local_UnhandledExceptionFilter(struct _EXCEPTION_POINTERS *info)
 		, context->R12, context->R13, context->R14, context->R15
 #else
 		"------ %s -----\r\n"
-		"%s\r\n"
 		" Date        : %d/%02d/%02d %02d:%02d:%02d\r\n"
 		" Code/Addr   : %X / %p\r\n"
 		" AX/BX/CX/DX : %08x / %08x / %08x / %08x\r\n"
 		" SI/DI/BP/SP : %08x / %08x / %08x / %08x\r\n"
 		"------- 堆栈信息 -----\r\n"
 		, ExceptionTitle
-		, szErrMsg
 		, tm.wYear, tm.wMonth, tm.wDay, tm.wHour, tm.wMinute, tm.wSecond
 		, info->ExceptionRecord->ExceptionCode, info->ExceptionRecord->ExceptionAddress
 		, context->Eax, context->Ebx, context->Ecx, context->Edx
@@ -499,9 +435,8 @@ LONG WINAPI Local_UnhandledExceptionFilter(struct _EXCEPTION_POINTERS *info)
 	::WriteFile(hFile, buf, len, &len, 0);
 	::CloseHandle(hFile);
 
-
-	sprintf(buf, ExceptionLogInfo, szErrMsg, ExceptionLogFile);
-	::MessageBoxA(0, buf, ExceptionTitle, MB_OK | MB_ICONERROR);
+	sprintf(buf, ExceptionLogInfo, ExceptionLogFile);
+	::MessageBoxA(0, buf, ExceptionTitle, MB_OK);
 
 	//context->Esi++;
 	////::SetErrorMode(SEM_NOALIGNMENTFAULTEXCEPT);

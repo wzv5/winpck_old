@@ -1,5 +1,5 @@
 //////////////////////////////////////////////////////////////////////
-// CMapViewFile.h: 用于映射文件视图
+// MapViewFile.h: 用于映射文件视图
 // 
 //
 // 此程序由 李秋枫/stsm/liqf 编写
@@ -10,7 +10,12 @@
 //////////////////////////////////////////////////////////////////////
 
 #include <windows.h>
-#include "PckConf.h"
+
+#define USE_MAX_SINGLE_FILESIZE
+
+//#ifdef USE_MAX_SINGLE_FILESIZE
+//#include "PckConf.h"
+//#endif
 
 #if !defined(_MAPVIEWFILE_H_)
 #define _MAPVIEWFILE_H_
@@ -29,9 +34,6 @@ typedef union _QWORD{
 	};
 }UNQWORD, *LPUNQWORD;
 
-#define USE_MAX_SINGLE_FILESIZE
-
-
 #define PATH_LOCAL_PREFIX			"\\\\?\\"
 #define PATH_UNC_PREFIX				"\\\\?\\UNC"
 
@@ -41,29 +43,6 @@ typedef union _QWORD{
 #define PATH_LOCAL_PREFIX_LEN		4
 #define PATH_UNC_PREFIX_LEN			7
 
-#ifdef USE_MAX_SINGLE_FILESIZE
-
-#ifdef _DEBUG
-//#define MAX_PCKFILE_SIZE			0x7fffff00
-//#define MAX_PCKFILE_SIZE			0x6400000	//100MB
-
-#ifdef PCKV202
-#define MAX_PCKFILE_SIZE			0x7fffff00
-#elif defined PCKV203
-#define MAX_PCKFILE_SIZE			0xffffff00
-#endif
-
-#else
-#ifdef PCKV202
-#define MAX_PCKFILE_SIZE			0x7fffff00
-#elif defined PCKV203
-#define MAX_PCKFILE_SIZE			0xffffff00
-#endif
-#endif
-
-#endif
-
-
 #ifdef UNICODE
 #define tcscpy_s	wcscpy_s
 #define	tcslen		wcslen
@@ -71,8 +50,6 @@ typedef union _QWORD{
 #define tcscpy_s	strcpy_s
 #define	tcslen		strlen
 #endif
-
-
 
 class CMapViewFile
 {
@@ -84,7 +61,7 @@ public:
 	LPBYTE	View(QWORD dwAddress, DWORD dwSize = 0);
 	virtual LPBYTE	ReView(QWORD dwAddress, DWORD dwSize = 0);
 
-	virtual void	SetFilePointer(QWORD lDistanceToMove, DWORD dwMoveMethod);
+	virtual void	SetFilePointer(QWORD lDistanceToMove, DWORD dwMoveMethod = FILE_BEGIN);
 
 	virtual DWORD	Read(LPVOID buffer, DWORD dwBytesToRead);
 
@@ -102,7 +79,7 @@ protected:
 	void MakeUnlimitedPath(char *_dst, LPCSTR _src, size_t size);
 
 #ifdef USE_MAX_SINGLE_FILESIZE
-	void GetPkxName(char *dst, LPCSTR src);
+	void GetPkxName(LPSTR dst, LPCSTR src);
 	void GetPkxName(LPWSTR dst, LPCWSTR src);
 #endif
 
@@ -153,28 +130,21 @@ protected:
 
 
 
-
-
-
-
 class CMapViewFileRead : public CMapViewFile
 {
 public:
 	CMapViewFileRead();
-	//CMapViewFileRead(char _filename);
-	//CMapViewFileRead(wchar_t _filename);
-
 	virtual ~CMapViewFileRead();
 
 #ifdef USE_MAX_SINGLE_FILESIZE
-	BOOL	OpenPck(LPSTR lpszFilename);
+	BOOL	OpenPck(LPCSTR lpszFilename);
 	BOOL	OpenPck(LPCWSTR lpszFilename);
 #endif
 
-	BOOL	Open(char *lpszFilename);
+	BOOL	Open(LPCSTR lpszFilename);
 	BOOL	Open(LPCWSTR lpszFilename);
 
-	BOOL	Mapping(char *lpszNamespace);
+	BOOL	Mapping(LPCSTR lpszNamespace);
 
 protected:
 
@@ -185,18 +155,19 @@ protected:
 class CMapViewFileWrite : public CMapViewFile
 {
 public:
-	CMapViewFileWrite();
+	CMapViewFileWrite(DWORD);
 	virtual ~CMapViewFileWrite();
 	
 #ifdef USE_MAX_SINGLE_FILESIZE
-	BOOL	OpenPck(char *lpszFilename, DWORD dwCreationDisposition);
+	//void	SetMaxSinglePckSize(QWORD qwMaxPckSize);
+	BOOL	OpenPck(LPCSTR lpszFilename, DWORD dwCreationDisposition);
 	BOOL	OpenPck(LPCWSTR lpszFilename, DWORD dwCreationDisposition);
 #endif
 
-	BOOL	Open(char *lpszFilename, DWORD dwCreationDisposition);
+	BOOL	Open(LPCSTR lpszFilename, DWORD dwCreationDisposition);
 	BOOL	Open(LPCWSTR lpszFilename, DWORD dwCreationDisposition);
 
-	BOOL	Mapping(char *lpszNamespace, QWORD dwMaxSize);
+	BOOL	Mapping(LPCSTR lpszNamespace, QWORD dwMaxSize);
 	void	SetEndOfFile();
 
 	DWORD	Write(LPVOID buffer, DWORD dwBytesToWrite);
@@ -206,10 +177,7 @@ public:
 protected:
 
 #ifdef USE_MAX_SINGLE_FILESIZE
-	//BOOL	OpenPck(char *lpszFilename, DWORD dwCreationDisposition);
-	//BOOL	OpenPck(LPCTSTR lpszFilename, DWORD dwCreationDisposition);
-
-	void	OpenPkx(char *lpszFilename, DWORD dwCreationDisposition);
+	void	OpenPkx(LPCSTR lpszFilename, DWORD dwCreationDisposition);
 	void	OpenPkx(LPCWSTR lpszFilename, DWORD dwCreationDisposition);
 #endif
 
@@ -217,7 +185,8 @@ public:
 
 protected:
 #ifdef USE_MAX_SINGLE_FILESIZE
-
+	//一个大文件需要分块成2个小文件时，分块的大小
+	QWORD	m_Max_PckFile_Size;
 #endif
 
 };

@@ -26,8 +26,7 @@ TDlg::~TDlg()
 	if (hWnd) EndDialog(FALSE);
 	delete [] dlgItems;
 
-	if(NULL != hRichEditLib)
-		FreeLibrary(hRichEditLib);
+	if(NULL != hRichEditLib)FreeLibrary(hRichEditLib);
 }
 
 BOOL TDlg::Create(HINSTANCE hInstance)

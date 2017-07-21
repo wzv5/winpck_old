@@ -15,13 +15,15 @@ static char *tini_id =
 #include "tlib.h"
 #include "tini.h"
 
+#ifdef _USE_T_INI_
+
 TInifile::TInifile(const char *_ini_file)
 {
 	ini_file = NULL;
-	if (_ini_file) Init(_ini_file);
 	root_sec = cur_sec = NULL;
 	ini_size = -1;
 	hMutex = NULL;
+	if (_ini_file) Init(_ini_file);
 }
 
 TInifile::~TInifile(void)
@@ -107,7 +109,7 @@ BOOL TInifile::GetFileInfo(LPTSTR	fname, FILETIME *ft, int *size)
 	FindClose(hFind);
 	return	TRUE;
 }
-
+#ifdef _USE_T_CRYPT_
 BOOL TInifile::Lock()
 {
 	if (!hMutex) {
@@ -129,11 +131,15 @@ void TInifile::UnLock()
 	if (hMutex) ReleaseMutex(hMutex);
 }
 
+#endif
+
 void TInifile::Init(const char *_ini_file)
 {
 	if (_ini_file) ini_file = strdup(_ini_file);
 
+#ifdef _USE_T_CRYPT_
 	Lock();
+#endif
 	FILE	*fp = fopen(ini_file, "r");
 
 	AddObj(root_sec = new TIniSection());
@@ -145,7 +151,7 @@ void TInifile::Init(const char *_ini_file)
 		char	name[1024];
 		BOOL	is_section;
 
-		TIniSection	*target_sec=root_sec;
+		TIniSection	*target_sec = root_sec;
 
 		while (fgets(buf, MAX_INI_LINE, fp)) {
 			BOOL	ret = Parse(buf, &is_section, name, val);
@@ -167,7 +173,9 @@ void TInifile::Init(const char *_ini_file)
 		fclose(fp);
 //		GetFileInfo(ini_file, &ini_ft, &ini_size);
 	}
+#ifdef _USE_T_CRYPT_
 	UnLock();
+#endif
 }
 
 void TInifile::UnInit()
@@ -181,7 +189,9 @@ void TInifile::UnInit()
 
 BOOL TInifile::WriteIni()
 {
+#ifdef _USE_T_CRYPT_
 	Lock();
+#endif
 
 	BOOL	ret = FALSE;
 	FILE	*fp = fopen(ini_file, "w");
@@ -208,7 +218,9 @@ BOOL TInifile::WriteIni()
 END:
 		fclose(fp);
 	}
+#ifdef _USE_T_CRYPT_
 	UnLock();
+#endif
 
 	return	ret;
 }
@@ -288,6 +300,13 @@ BOOL TInifile::SetInt(const char *key, int val)
 	return	SetStr(key, buf);
 }
 
+BOOL TInifile::SetInt64(const char *key, __int64 val)
+{
+	char	buf[100];
+	sprintf(buf, "%lld", val);
+	return	SetStr(key, buf);
+}
+
 int TInifile::GetInt(const char *key, int default_val)
 {
 	char	buf[100];
@@ -295,3 +314,11 @@ int TInifile::GetInt(const char *key, int default_val)
 	return	atoi(buf);
 }
 
+__int64 TInifile::GetInt64(const char *key, __int64 default_val)
+{
+	char	buf[100];
+	if (GetStr(key, buf, sizeof(buf), "") <= 0) return default_val;
+	return	_atoi64(buf);
+}
+
+#endif

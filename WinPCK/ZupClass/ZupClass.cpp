@@ -8,7 +8,7 @@
 // 
 // 2012.5.23
 //////////////////////////////////////////////////////////////////////
-#include "zlib.h"
+//#include "zlib.h"
 #include "ZupClass.h"
 
 
@@ -46,7 +46,7 @@ void CZupClass::BuildDirTree()
 
 	CMapViewFileRead	*lpcReadfile = new CMapViewFileRead();
 
-	if(!OpenPckAndMappingRead(lpcReadfile, m_PckAllInfo.szFilename)){
+	if(!OpenPckAndMappingRead(lpcReadfile, m_PckAllInfo.szFilename, m_szMapNameRead)){
 		delete lpcReadfile;
 		return;
 	}
@@ -74,7 +74,7 @@ void CZupClass::BuildDirTree()
 	LPPCKINDEXTABLE lpPckIndexTable = m_lpPckIndexTable;
 	LPPCKINDEXTABLE lpZupIndexTable = m_lpZupIndexTable;
 
-	for(DWORD i = 0;i<m_PckAllInfo.PckTail.dwFileCount;i++)
+	for(DWORD i = 0;i<m_PckAllInfo.dwFileCount;i++)
 	{
 
 		//以element\开头的都需要解码
@@ -107,7 +107,7 @@ void CZupClass::BuildDirTree()
 
 				DWORD	dwFileBytesRead = 4;
 				//if(Z_OK != 
-					uncompress((BYTE*)&lpZupIndexTable->cFileIndex.dwFileClearTextSize, &dwFileBytesRead,
+					decompress((BYTE*)&lpZupIndexTable->cFileIndex.dwFileClearTextSize, &dwFileBytesRead,
 						lpbuffer, lpZupIndexTable->cFileIndex.dwFileCipherTextSize);
 
 				lpZupIndexTable->cFileIndex.dwFileCipherTextSize = lpPckIndexTable->cFileIndex.dwFileClearTextSize;
@@ -141,7 +141,7 @@ BOOL CZupClass::Init(LPCTSTR szFile)
 	if(m_ReadCompleted = MountPckFile(m_PckAllInfo.szFilename))
 	{
 
-		if(!AllocIndexTableAndInit(m_lpZupIndexTable, m_PckAllInfo.PckTail.dwFileCount)){
+		if(!AllocIndexTableAndInit(m_lpZupIndexTable, m_PckAllInfo.dwFileCount)){
 			return FALSE;
 		}
 
